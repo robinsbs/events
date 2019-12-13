@@ -70,6 +70,27 @@ namespace SkyBlueSoftware.Events.Test
             await events.Publish(new E());
             t.Verify(events);
         }
+
+        [TestMethod]
+        public async Task EventStream_Tests_Test07()
+        {
+            var a = new A();
+            var events = a.SubscribedTo().ToArray();
+            Assert.AreEqual(1, events.Length);
+            Assert.AreEqual(typeof(E), events[0]);
+            await Task.CompletedTask.Async();
+        }
+
+        [TestMethod]
+        public async Task EventStream_Tests_Test08()
+        {
+            var d = new D();
+            var events = d.SubscribedTo().ToArray();
+            Assert.AreEqual(2, events.Length);
+            Assert.AreEqual(typeof(IE), events[0]);
+            Assert.AreEqual(typeof(E2), events[1]);
+            await Task.CompletedTask.Async();
+        }
     }
 
     public class A : ISubscribeTo<E>
