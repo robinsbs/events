@@ -34,9 +34,9 @@ namespace SkyBlueSoftware.Events.Test
             if (expected.Exists) Assert.Fail(message); else Assert.Inconclusive(message);
         }
 
-        private string CreateActual(object o) => JsonConvert.SerializeObject(o, new JsonSerializerSettings { Formatting = Formatting.Indented });
-        private void WriteExpected(string actual, string fileName) => File.WriteAllText(fileName, actual);
-        private (bool Exists, string Contents) ReadExpected(string fileName) => File.Exists(fileName) ? (true, File.ReadAllText(fileName)) : (false, string.Empty);
+        private static string CreateActual(object o) => JsonConvert.SerializeObject(o, new JsonSerializerSettings { Formatting = Formatting.Indented });
+        private static void WriteExpected(string actual, string fileName) => File.WriteAllText(fileName, actual);
+        private static (bool Exists, string Contents) ReadExpected(string fileName) => File.Exists(fileName) ? (true, File.ReadAllText(fileName)) : (false, string.Empty);
 
         private static string TestMethodName() => CallerInfo(x => x.Name);
 
