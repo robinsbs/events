@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace SkyBlueSoftware.Events
 {
@@ -9,5 +10,6 @@ namespace SkyBlueSoftware.Events
         int CallCount { get; }
         ISubscription Unsubscribe();
         ISubscription Resubscribe();
+        Task On(object o);
     }
 }

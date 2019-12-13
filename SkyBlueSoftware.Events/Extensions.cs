@@ -20,5 +20,15 @@ namespace SkyBlueSoftware.Events
                 }
             }
         }
+
+        public static IEnumerable<ISubscription> CreateSubscriptions(this object o)
+        {
+            foreach (var t in o.SubscribedTo())
+            {
+                var genericType = typeof(Subscription<>).MakeGenericType(t);
+                var instance = Activator.CreateInstance(genericType, new[] { o });
+                yield return (ISubscription)instance;
+            }
+        }
     }
 }

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SkyBlueSoftware.Events
 {
     public class EventStream : IEventStream
     {
-        private readonly ICollection<Subscription> subscriptions;
+        private readonly ICollection<ISubscription> subscriptions;
 
-        public static IEventStream Create() => new EventStream(new List<Subscription>());
+        public static IEventStream Create() => new EventStream(new List<ISubscription>());
 
-        public EventStream(ICollection<Subscription> subscriptions)
+        public EventStream(ICollection<ISubscription> subscriptions)
         {
             this.subscriptions = subscriptions;
         }
@@ -22,20 +20,10 @@ namespace SkyBlueSoftware.Events
             var r = new Subscriptions(new List<ISubscription>(), this);
             foreach(var s in subscribers)
             {
-                var interfaces = s.GetType().GetInterfaces().Where(x => x.IsGenericType && typeof(ISubscribeTo).IsInstanceOfType(s));
-                foreach (var def in interfaces)
+                foreach (var subscription in s.CreateSubscriptions())
                 {
-                    var eventType = def.GetGenericArguments().FirstOrDefault();
-                    if (eventType != null)
-                    {
-                        var genericType = typeof(Subscription<>).MakeGenericType(eventType);
-                        var instance = Activator.CreateInstance(genericType, new[] { s });
-                        if (instance is Subscription es)
-                        {
-                            subscriptions.Add(es);
-                            r.Add(es);
-                        }
-                    }
+                    subscriptions.Add(subscription);
+                    r.Add(subscription);
                 }
             }
             return r;
