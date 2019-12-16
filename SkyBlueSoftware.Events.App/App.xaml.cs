@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Autofac;
+using System.Windows;
 
 namespace SkyBlueSoftware.Events.App
 {
@@ -6,7 +7,14 @@ namespace SkyBlueSoftware.Events.App
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            new MainWindow().Show();
+            var b = new ContainerBuilder();
+            //b.RegisterType<A>().SingleInstance().AsImplementedInterfaces().AsSelf();
+            b.RegisterType<Body>().SingleInstance();
+            b.RegisterType<Main>().SingleInstance();
+            var c = b.Build();
+            var mainWindow = new MainWindow();
+            mainWindow.DataContext = c.Resolve<Main>();
+            mainWindow.Show();
         }
     }
 }
