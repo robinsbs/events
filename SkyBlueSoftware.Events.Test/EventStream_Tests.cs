@@ -26,10 +26,8 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test02()
         {
-            var events = EventStream.Create();
-            var subscriberA = events.Subscribe(new A()).FirstOrDefault();
-            events.Subscribe(new B());
-            subscriberA.Unsubscribe();
+            var events = EventStream.Create().Subscribe(new A(), new B());
+            events.Where(x => x.Subscriber == typeof(A)).ForEach(x => x.Unsubscribe());
             await events.Publish(new E());
             t.Verify(events);
         }
@@ -63,10 +61,8 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test06()
         {
-            var events = EventStream.Create();
-            var subscriberA = events.Subscribe(new A()).FirstOrDefault();
-            events.Subscribe(new B());
-            subscriberA.Unsubscribe().Resubscribe();
+            var events = EventStream.Create().Subscribe(new A(), new B());
+            events.Where(x => x.Subscriber == typeof(A)).FirstOrDefault().Unsubscribe().Resubscribe();
             await events.Publish(new E());
             t.Verify(events);
         }

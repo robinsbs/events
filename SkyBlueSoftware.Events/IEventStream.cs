@@ -5,7 +5,7 @@ namespace SkyBlueSoftware.Events
 {
     public interface IEventStream : IEnumerable<ISubscription>
     {
-        ISubscriptions Subscribe(params ISubscribeTo[] subscribers);
+        IEventStream Subscribe(params ISubscribeTo[] subscribers);
         Task Publish<T>(T e);
     }
 }
