@@ -14,7 +14,8 @@ namespace SkyBlueSoftware.Events.App
 
         public async Task On(Event1 e)
         {
-            await Task.Run(() => Log.Insert(0, $"Received event {e}"));
+            Log.Insert(0, $"Received event {e}");
+            await Task.CompletedTask;
         }
     }
 }
