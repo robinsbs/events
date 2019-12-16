@@ -19,4 +19,12 @@
     <ProjectReference Include="..\SkyBlueSoftware.Events\SkyBlueSoftware.Events.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="View\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
 </Project>
