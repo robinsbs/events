@@ -39,5 +39,10 @@ namespace SkyBlueSoftware.Events
                 yield return (ISubscription)instance;
             }
         }
+
+        public static ISubscription[] CreateSubscriptions(this ISubscribeTo[] subscribers)
+        {
+            return subscribers.SelectMany(x => x.CreateSubscriptions()).ToArray();
+        }
     }
 }
