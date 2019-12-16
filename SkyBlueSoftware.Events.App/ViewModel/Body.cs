@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace SkyBlueSoftware.Events.App
 {
-    public class Body
+    public class Body : ViewModelBase
     {
         private readonly EventStream events;
 
@@ -15,21 +14,6 @@ namespace SkyBlueSoftware.Events.App
         }
 
         public IEnumerable<ISubscribeTo> Subscribers { get; }
-        public ICommand Event1Command => new Command(async () => await events.Publish(new Event1()));
-    }
-
-    public class Command : ICommand
-    {
-        private readonly Action action;
-
-        public Command(Action action)
-        {
-            this.action = action;
-        }
-
-        public event EventHandler CanExecuteChanged = (o, e) => { };
-
-        public bool CanExecute(object parameter) => true;
-        public void Execute(object parameter) => action();
+        public ICommand Event1Command => Do(async () => await events.Publish(new Event1()));
     }
 }
