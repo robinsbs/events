@@ -40,7 +40,7 @@ namespace SkyBlueSoftware.Events
             }
         }
 
-        public static ISubscription[] CreateSubscriptions(this ISubscribeTo[] subscribers)
+        public static ISubscription[] CreateSubscriptions(this IEnumerable<ISubscribeTo> subscribers)
         {
             return subscribers.SelectMany(x => x.CreateSubscriptions()).ToArray();
         }

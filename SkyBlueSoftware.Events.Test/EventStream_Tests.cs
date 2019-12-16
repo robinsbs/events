@@ -18,7 +18,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test01()
         {
-            var events = EventStream.Create().Subscribe(new A(), new B());
+            var events = new EventStream(new A(), new B());
             await events.Publish(new E1());
             t.Verify(events);
         }
@@ -26,7 +26,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test02()
         {
-            var events = EventStream.Create().Subscribe(new A(), new B());
+            var events = new EventStream(new A(), new B());
             events.Where(x => x.Subscriber == typeof(A)).ForEach(x => x.Unsubscribe());
             await events.Publish(new E());
             t.Verify(events);
@@ -35,7 +35,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test03()
         {
-            var events = EventStream.Create().Subscribe(new C());
+            var events = new EventStream(new C());
             await events.Publish(new E2());
             t.Verify(events);
         }
@@ -43,7 +43,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test04()
         {
-            var events = EventStream.Create().Subscribe(new C());
+            var events = new EventStream(new C());
             await events.Publish(new E());
             t.Verify(events);
         }
@@ -51,7 +51,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test05()
         {
-            var events = EventStream.Create().Subscribe(new D());
+            var events = new EventStream(new D());
             await events.Publish(new E1());
             await events.Publish(new E2());
             await events.Publish(new E3());
@@ -61,7 +61,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test06()
         {
-            var events = EventStream.Create().Subscribe(new A(), new B());
+            var events = new EventStream(new A(), new B());
             events.Where(x => x.Subscriber == typeof(A)).FirstOrDefault().Unsubscribe().Resubscribe();
             await events.Publish(new E());
             t.Verify(events);
