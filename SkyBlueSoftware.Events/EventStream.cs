@@ -20,11 +20,11 @@ namespace SkyBlueSoftware.Events
             var r = new Subscriptions(new List<ISubscription>(), this);
             foreach(var s in subscribers)
             {
-                foreach (var subscription in s.CreateSubscriptions())
+                s.CreateSubscriptions().ForEach(x => 
                 {
-                    subscriptions.Add(subscription);
-                    r.Add(subscription);
-                }
+                    subscriptions.Add(x);
+                    r.Add(x);
+                });
             }
             return r;
         }

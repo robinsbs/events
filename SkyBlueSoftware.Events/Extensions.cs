@@ -7,6 +7,14 @@ namespace SkyBlueSoftware.Events
 {
     public static class Extensions
     {
+        public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            foreach (var item in source)
+            {
+                action(item);
+            }
+        }
+
         public static async Task Async(this Task t) => await t.ConfigureAwait(false);
 
         public static IEnumerable<Type> SubscribedTo(this object o)
