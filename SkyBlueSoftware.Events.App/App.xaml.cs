@@ -8,6 +8,7 @@ namespace SkyBlueSoftware.Events.App
         protected override void OnStartup(StartupEventArgs e)
         {
             var b = new ContainerBuilder();
+            b.RegisterType<EventStream>().SingleInstance();
             b.RegisterType<A>().SingleInstance().AsImplementedInterfaces().AsSelf();
             b.RegisterType<Body>().SingleInstance();
             b.RegisterType<Main>().SingleInstance();

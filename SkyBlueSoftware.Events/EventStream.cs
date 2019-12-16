@@ -8,7 +8,6 @@ namespace SkyBlueSoftware.Events
     {
         private readonly IEnumerable<ISubscription> subscriptions;
 
-        public EventStream(params ISubscribeTo[] subscribers) => subscriptions = subscribers.CreateSubscriptions();
         public EventStream(IEnumerable<ISubscribeTo> subscribers) => subscriptions = subscribers.CreateSubscriptions();
 
         public async Task Publish<T>(T e) { foreach (var o in subscriptions) await o.On(e); }
