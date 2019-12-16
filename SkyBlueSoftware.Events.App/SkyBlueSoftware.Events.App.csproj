@@ -11,4 +11,12 @@
     <WarningsAsErrors />
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SkyBlueSoftware.Events\SkyBlueSoftware.Events.csproj" />
+  </ItemGroup>
+
 </Project>
