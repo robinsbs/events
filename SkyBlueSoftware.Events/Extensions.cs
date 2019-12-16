@@ -16,7 +16,8 @@ namespace SkyBlueSoftware.Events
             {
                 foreach (var eventType in i.GetGenericArguments())
                 {
-                    if (eventType != null) yield return eventType;
+                    yield return eventType;
+                    break;
                 }
             }
         }
