@@ -9,14 +9,14 @@ namespace SkyBlueSoftware.Events
     {
         private readonly IReadOnlyCollection<ISubscription> subscriptions;
 
-        public static IEventStream Create() => new EventStream(new List<ISubscription>());
+        public static IEventStream Create(IReadOnlyCollection<ISubscription> subscriptions = null) => new EventStream(subscriptions ?? new ISubscription[] { });
 
         public EventStream(IReadOnlyCollection<ISubscription> subscriptions)
         {
             this.subscriptions = subscriptions;
         }
 
-        public IEventStream Subscribe(params ISubscribeTo[] subscribers) => new EventStream(subscribers.SelectMany(x => x.CreateSubscriptions()).ToArray());
+        public IEventStream Subscribe(params ISubscribeTo[] subscribers) => EventStream.Create(subscribers.SelectMany(x => x.CreateSubscriptions()).ToArray());
 
         public async Task Publish<T>(T e)
         {
