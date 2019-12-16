@@ -37,8 +37,7 @@ namespace SkyBlueSoftware.Events
 
         public override async Task On(object o)
         {
-            if (IsNotSubscribed) return;
-            if (o is T e)
+            if (IsSubscribed && o is T e)
             {
                 await subscriber.On(e);
                 CallCount += 1;
