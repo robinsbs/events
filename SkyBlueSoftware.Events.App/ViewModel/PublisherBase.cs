@@ -11,6 +11,8 @@ namespace SkyBlueSoftware.Events.App
             this.events = events;
         }
 
+        public string Label => $"{GetType().Name} {Name}";
+        public abstract string Name { get; }
         public ICommand PublishCommand => Do(async () => await events.Publish(CreateEvent()));
 
         protected abstract object CreateEvent();

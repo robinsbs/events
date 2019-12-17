@@ -14,6 +14,11 @@ namespace SkyBlueSoftware.Events.App
                 .SingleInstance()
                 .AsImplementedInterfaces()
                 .As<SubscriberBase>();
+            b.RegisterAssemblyTypes(typeof(PublisherBase).Assembly)
+                .Where(t => t.IsSubclassOf(typeof(PublisherBase)))
+                .SingleInstance()
+                .AsImplementedInterfaces()
+                .As<PublisherBase>();
             b.RegisterType<Body>().SingleInstance();
             b.RegisterType<Main>().SingleInstance();
             var c = b.Build();

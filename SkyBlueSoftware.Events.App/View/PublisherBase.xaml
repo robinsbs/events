@@ -2,11 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:SkyBlueSoftware.Events.App">
     
-    <DataTemplate DataType="{x:Type vm:Body}">
-        <StackPanel>
-            <ItemsControl ItemsSource="{Binding Publishers}" />
-            <ItemsControl ItemsSource="{Binding Subscribers}" />
-        </StackPanel>
+    <DataTemplate DataType="{x:Type vm:PublisherBase}">
+        <Button Content="{Binding Label}" Command="{Binding PublishCommand}" />
     </DataTemplate>
 
 </ResourceDictionary>
