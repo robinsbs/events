@@ -10,7 +10,11 @@ namespace SkyBlueSoftware.Events
 
         public EventStream(IEnumerable<ISubscribeTo> subscribers) => subscriptions = subscribers.CreateSubscriptions();
 
-        public async Task Publish<T>(T e) { foreach (var o in subscriptions) await o.On(e); }
+        public async Task Publish<T>(T e) 
+        {
+            if (e == null) return;
+            foreach (var o in subscriptions) await o.On(e); 
+        }
 
         #region IEnumerable
 

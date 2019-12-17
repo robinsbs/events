@@ -36,7 +36,7 @@ namespace SkyBlueSoftware.Events
             {
                 var genericType = typeof(Subscription<>).MakeGenericType(t);
                 var instance = Activator.CreateInstance(genericType, new[] { o });
-                yield return (ISubscription)instance;
+                if (instance is ISubscription s) yield return s;
             }
         }
 
