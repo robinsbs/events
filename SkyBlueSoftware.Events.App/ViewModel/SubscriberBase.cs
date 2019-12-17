@@ -5,9 +5,12 @@ namespace SkyBlueSoftware.Events.App
 {
     public abstract class SubscriberBase
     {
+        private int counter;
+
         public SubscriberBase()
         {
             Log = new ObservableCollection<string>();
+            counter = 0;
         }
 
         public string Name => GetType().Name;
@@ -15,7 +18,7 @@ namespace SkyBlueSoftware.Events.App
 
         protected async Task LogEvent<T>(T e)
         {
-            Log.Insert(0, $"Received event {e}");
+            Log.Insert(0, $"{++counter} - Received event {e?.GetType().Name}");
             await Task.CompletedTask;
         }
     }
