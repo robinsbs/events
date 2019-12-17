@@ -44,4 +44,24 @@ namespace SkyBlueSoftware.Events
             }
         }
     }
+
+    public class SubscriptionSync<T> : Subscription
+    {
+        private readonly ISubscribeToSync<T> subscriber;
+
+        public SubscriptionSync(ISubscribeToSync<T> subscriber) : base(subscriber.GetType(), typeof(T))
+        {
+            this.subscriber = subscriber;
+        }
+
+        public override Task On(object o)
+        {
+            if (IsSubscribed && o is T e)
+            {
+                subscriber.On(e);
+                CallCount += 1;
+            }
+            return Task.CompletedTask;
+        }
+    }
 }

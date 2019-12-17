@@ -1,9 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 
 namespace SkyBlueSoftware.Events.App
 {
-    public class A : ISubscribeTo<Event1>
+    public class A : ISubscribeToSync<Event1>
     {
         public A()
         {
@@ -12,10 +11,9 @@ namespace SkyBlueSoftware.Events.App
 
         public ObservableCollection<string> Log { get; }
 
-        public async Task On(Event1 e)
+        public void On(Event1 e)
         {
             Log.Insert(0, $"Received event {e}");
-            await Task.CompletedTask;
         }
     }
 }
