@@ -2,7 +2,7 @@
 
 namespace SkyBlueSoftware.Events.App
 {
-    public class A : SubscriberBase, ISubscribeTo<Event1>
+    public class SubscriberA : SubscriberBase, ISubscribeTo<Event1>
     {
         public async Task On(Event1 e) => await LogEvent(e);
     }

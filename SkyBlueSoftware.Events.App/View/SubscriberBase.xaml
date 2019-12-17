@@ -6,7 +6,6 @@
         <Border BorderBrush="DarkGray" BorderThickness="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Subscriber: " />
                     <TextBlock Text="{Binding Name}" />
                 </StackPanel>
                 <ItemsControl ItemsSource="{Binding Log}" />
