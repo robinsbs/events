@@ -8,7 +8,9 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding Name}" />
                 </StackPanel>
-                <ItemsControl ItemsSource="{Binding Log}" />
+                <ScrollViewer Height="100">
+                    <ItemsControl ItemsSource="{Binding Log}" />
+                </ScrollViewer>
             </StackPanel>
         </Border>
     </DataTemplate>

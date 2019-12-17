@@ -3,10 +3,10 @@
                     xmlns:vm="clr-namespace:SkyBlueSoftware.Events.App">
     
     <DataTemplate DataType="{x:Type vm:Body}">
-        <StackPanel>
-            <ItemsControl ItemsSource="{Binding Publishers}" />
+        <DockPanel>
+            <ItemsControl DockPanel.Dock="Left" ItemsSource="{Binding Publishers}" />
             <ItemsControl ItemsSource="{Binding Subscribers}" />
-        </StackPanel>
+        </DockPanel>
     </DataTemplate>
 
 </ResourceDictionary>
