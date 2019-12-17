@@ -34,7 +34,7 @@ namespace SkyBlueSoftware.Events
         {
             foreach (var t in o.SubscribedTo())
             {
-                var genericType = o is ISubscribeToSync ? typeof(SubscriptionSync<>).MakeGenericType(t) : typeof(Subscription<>).MakeGenericType(t);
+                var genericType = typeof(Subscription<>).MakeGenericType(t);
                 var instance = Activator.CreateInstance(genericType, new[] { o });
                 if (instance is ISubscription s) yield return s;
             }
