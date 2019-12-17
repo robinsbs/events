@@ -22,6 +22,12 @@ Unsubscribe() should flip a bit... not remove from the dictionary... that way Re
 A Subscriber must be able to subscribe to multiple events
 Support execution ordering of event subscribers
 Support injecting event subscriber execution precondition/postcondition/valdations/etc.
+ISubscribeToBefore<>
+ISubscribeToAfter<>
+Publish<>()
+Support Publish cancellation
+Support ISubscriptions<> injection for subscription management
+Support Publish progress indicator
 
 Test Output
 
