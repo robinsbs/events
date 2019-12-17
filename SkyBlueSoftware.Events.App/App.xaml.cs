@@ -9,8 +9,11 @@ namespace SkyBlueSoftware.Events.App
         {
             var b = new ContainerBuilder();
             b.RegisterType<EventStream>().SingleInstance();
-            b.RegisterType<A>().SingleInstance().AsImplementedInterfaces().AsSelf();
-            b.RegisterType<B>().SingleInstance().AsImplementedInterfaces().AsSelf();
+            b.RegisterAssemblyTypes(typeof(SubscriberBase).Assembly)
+                .Where(t => t.IsSubclassOf(typeof(SubscriberBase)))
+                .SingleInstance()
+                .AsImplementedInterfaces()
+                .As<SubscriberBase>();
             b.RegisterType<Body>().SingleInstance();
             b.RegisterType<Main>().SingleInstance();
             var c = b.Build();
