@@ -15,5 +15,6 @@ namespace SkyBlueSoftware.Events.App
 
         public IEnumerable<ISubscribeTo> Subscribers { get; }
         public ICommand Event1Command => Do(async () => await events.Publish(new Event1()));
+        public ICommand Event2Command => Do(async () => await events.Publish(new Event2()));
     }
 }

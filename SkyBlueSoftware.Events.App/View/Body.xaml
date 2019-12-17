@@ -5,6 +5,7 @@
     <DataTemplate DataType="{x:Type vm:Body}">
         <StackPanel>
             <Button Content="Event1" Command="{Binding Event1Command}" />
+            <Button Content="Event2" Command="{Binding Event2Command}" />
             <ItemsControl ItemsSource="{Binding Subscribers}" />
         </StackPanel>
     </DataTemplate>

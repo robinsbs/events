@@ -10,6 +10,7 @@ namespace SkyBlueSoftware.Events.App
             var b = new ContainerBuilder();
             b.RegisterType<EventStream>().SingleInstance();
             b.RegisterType<A>().SingleInstance().AsImplementedInterfaces().AsSelf();
+            b.RegisterType<B>().SingleInstance().AsImplementedInterfaces().AsSelf();
             b.RegisterType<Body>().SingleInstance();
             b.RegisterType<Main>().SingleInstance();
             var c = b.Build();
