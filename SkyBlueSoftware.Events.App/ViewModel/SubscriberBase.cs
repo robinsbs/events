@@ -10,6 +10,7 @@ namespace SkyBlueSoftware.Events.App
             Log = new ObservableCollection<string>();
         }
 
+        public string Name => GetType().Name;
         public ObservableCollection<string> Log { get; }
 
         protected async Task LogEvent<T>(T e)

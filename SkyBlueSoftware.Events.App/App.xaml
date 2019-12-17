@@ -5,8 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="View/A.xaml" />
-                <ResourceDictionary Source="View/B.xaml" />
+                <ResourceDictionary Source="View/SubscriberBase.xaml" />
                 <ResourceDictionary Source="View/Body.xaml" />
                 <ResourceDictionary Source="View/Main.xaml" />
             </ResourceDictionary.MergedDictionaries>
