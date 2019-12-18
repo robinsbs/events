@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.Test", "SkyBlueSoftware.Events.Test\SkyBlueSoftware.Events.Test.csproj", "{084EA2A1-B646-4755-A3B4-3B588EF044D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Events.App", "SkyBlueSoftware.Events.App\SkyBlueSoftware.Events.App.csproj", "{F4C2804D-04B8-4749-866A-0019EE633D16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.App", "SkyBlueSoftware.Events.App\SkyBlueSoftware.Events.App.csproj", "{F4C2804D-04B8-4749-866A-0019EE633D16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{73EA29C2-500F-4EAD-A0D1-265D63866615}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{084EA2A1-B646-4755-A3B4-3B588EF044D7} = {73EA29C2-500F-4EAD-A0D1-265D63866615}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7527884-EE44-40A9-B201-B57CD41DF9A2}
