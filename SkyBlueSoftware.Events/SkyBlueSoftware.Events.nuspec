@@ -17,6 +17,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="LICENSE" target="" />
+    <file src="..\LICENSE" target="" />
   </files>
 </package>
