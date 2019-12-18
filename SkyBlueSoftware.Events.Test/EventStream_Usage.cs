@@ -1,40 +1,28 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SkyBlueSoftware.Events;
 
-namespace SkyBlueSoftware.Events.Test
+[TestClass]
+public class EventStream_Usage
 {
-    [TestClass]
-    public class EventStream_Usage
+    [TestMethod]
+    public void EventStream_Usage_Example()
     {
-        [TestMethod]
-        public void EventStream_Usage_Example()
-        {
-            var events = new EventStream(new[] { new DetailViewModel() });
-            new ListViewModel(events).Select();
-        }
+        new ListViewModel(new EventStream(new[] { new DetailViewModel() })).Select();
     }
+}
 
-    public class SelectedEvent { }
+class SelectedEvent { }
 
-    public class ListViewModel
-    {
-        private readonly IEventStream events;
+class ListViewModel
+{
+    private readonly IEventStream events;
+    public ListViewModel(IEventStream events) { this.events = events; }
+    public void Select() => events.Publish(new SelectedEvent());
+}
 
-        public ListViewModel(IEventStream events)
-        {
-            this.events = events;
-        }
-
-        public void Select() => events.Publish(new SelectedEvent());
-    }
-
-    public class DetailViewModel : ISubscribeTo<SelectedEvent>
-    {
-        public async Task On(SelectedEvent e)
-        {
-            Console.WriteLine($"Received {e}");
-            await Task.CompletedTask;
-        }
-    }
+class DetailViewModel : ISubscribeTo<SelectedEvent>
+{
+    public async Task On(SelectedEvent e) { Console.WriteLine($"{GetType().Name} received {e}"); await Task.CompletedTask; }
 }

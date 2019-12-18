@@ -14,6 +14,7 @@ ISubscribeTo<TEventStream, TEvent>
 
 ToDo
 
+fix circular dependency issue... EventStream depends on all subscribers -> Subscriber depends on EventStream
 create extension methods that get the event type(s) from an instance
 create extension methods that get the event type(s) from a type
 try to allow multiple event streams to coexist
