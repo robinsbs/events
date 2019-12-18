@@ -16,4 +16,7 @@
       <group targetFramework=".NETCoreApp3.0" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="LICENSE" target="" />
+  </files>
 </package>
