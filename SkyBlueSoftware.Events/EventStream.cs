@@ -6,9 +6,18 @@ namespace SkyBlueSoftware.Events
 {
     public class EventStream : IEventStream
     {
-        private readonly IEnumerable<ISubscription> subscriptions;
+        private IEnumerable<ISubscription> subscriptions;
 
-        public EventStream(IEnumerable<ISubscribeTo> subscribers) => subscriptions = subscribers.CreateSubscriptions();
+        public EventStream()
+        {
+            subscriptions = new ISubscription[] { };
+        }
+
+        public EventStream Initialize(IEnumerable<ISubscribeTo> subscribers)
+        {
+            subscriptions = subscribers.CreateSubscriptions();
+            return this;
+        }
 
         public async Task Publish<T>(T e) 
         {

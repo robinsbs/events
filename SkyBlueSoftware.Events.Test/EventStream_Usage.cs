@@ -9,7 +9,9 @@ public class EventStream_Usage
     [TestMethod]
     public void EventStream_Usage_Example()
     {
-        new ListViewModel(new EventStream(new[] { new DetailViewModel() })).Select();
+        var events = new EventStream();
+        events.Initialize(new[] { new DetailViewModel() });
+        new ListViewModel(events).Select();
     }
 }
 

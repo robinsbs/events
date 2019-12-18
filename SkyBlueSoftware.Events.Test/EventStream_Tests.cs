@@ -88,7 +88,7 @@ namespace SkyBlueSoftware.Events.Test
             await Task.CompletedTask.Async();
         }
 
-        private static EventStream E(params ISubscribeTo[] subscribers) => new EventStream(subscribers);
+        private static EventStream E(params ISubscribeTo[] subscribers) => new EventStream().Initialize(subscribers);
     }
 
     public class A : ISubscribeTo<E>

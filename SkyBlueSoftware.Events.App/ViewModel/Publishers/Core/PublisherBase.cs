@@ -4,9 +4,9 @@ namespace SkyBlueSoftware.Events.App
 {
     public abstract class PublisherBase : ViewModelBase
     {
-        private readonly EventStream events;
+        private readonly IEventStream events;
 
-        public PublisherBase(EventStream events)
+        public PublisherBase(IEventStream events)
         {
             this.events = events;
         }

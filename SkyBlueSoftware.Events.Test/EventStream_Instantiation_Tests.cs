@@ -18,7 +18,7 @@ namespace SkyBlueSoftware.Events.Test
         public async Task EventStream_Instantiation_Tests_Test01()
         {
             var b = new B();
-            var events = new EventStream(new[] { b });
+            var events = new EventStream().Initialize(new[] { b });
             var a = new A(events);
             await a.Select();
             t.Verify(b);
