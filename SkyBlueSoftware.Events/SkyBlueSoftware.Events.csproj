@@ -3,11 +3,29 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright (c) 2019 Sky Blue Software</Copyright>
+    <Description>An event framework for .NET Core client applications.</Description>
+    <Version>0.0.1</Version>
+    <Authors>Sky Blue Software</Authors>
+    <Company>Sky Blue Software</Company>
+    <Product>Sky Blue Software - Events</Product>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/robinsbs/events</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/robinsbs/events</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
