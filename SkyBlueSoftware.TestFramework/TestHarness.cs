@@ -5,7 +5,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
-namespace SkyBlueSoftware.Events.Test
+
+namespace SkyBlueSoftware.TestFramework
 {
     public class TestHarness
     {
@@ -24,10 +25,10 @@ namespace SkyBlueSoftware.Events.Test
             var projectFileName = $"{projectPath}{fileName}";
             var actual = CreateActual(o);
             var expected = ReadExpected(projectFileName);
-            if (actual == expected.Contents) 
+            if (actual == expected.Contents)
             {
                 Console.WriteLine($"Verified against {fileName}");
-                return; 
+                return;
             }
             WriteExpected(actual, projectFileName);
             var message = $"{(expected.Exists ? "Replaced" : "Created")} expected file: {fileName}";

@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{73EA29C2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Events.ViewModel", "SkyBlueSoftware.Events.ViewModel\SkyBlueSoftware.Events.ViewModel.csproj", "{26809FA1-4B18-4EB9-BC2C-AF9EC6EC2CF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Events.Test.NuGet", "SkyBlueSoftware.Events.Test.NuGet\SkyBlueSoftware.Events.Test.NuGet.csproj", "{61AF9E0D-1A94-4172-AEED-E24CFD1A2444}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.TestFramework", "SkyBlueSoftware.TestFramework\SkyBlueSoftware.TestFramework.csproj", "{09E86984-D006-46CB-8770-F562604B4C02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,12 +39,22 @@ Global
 		{26809FA1-4B18-4EB9-BC2C-AF9EC6EC2CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26809FA1-4B18-4EB9-BC2C-AF9EC6EC2CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26809FA1-4B18-4EB9-BC2C-AF9EC6EC2CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61AF9E0D-1A94-4172-AEED-E24CFD1A2444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61AF9E0D-1A94-4172-AEED-E24CFD1A2444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61AF9E0D-1A94-4172-AEED-E24CFD1A2444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61AF9E0D-1A94-4172-AEED-E24CFD1A2444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09E86984-D006-46CB-8770-F562604B4C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09E86984-D006-46CB-8770-F562604B4C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09E86984-D006-46CB-8770-F562604B4C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09E86984-D006-46CB-8770-F562604B4C02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{084EA2A1-B646-4755-A3B4-3B588EF044D7} = {73EA29C2-500F-4EAD-A0D1-265D63866615}
+		{61AF9E0D-1A94-4172-AEED-E24CFD1A2444} = {73EA29C2-500F-4EAD-A0D1-265D63866615}
+		{09E86984-D006-46CB-8770-F562604B4C02} = {73EA29C2-500F-4EAD-A0D1-265D63866615}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7527884-EE44-40A9-B201-B57CD41DF9A2}

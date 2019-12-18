@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SkyBlueSoftware.TestFramework;
 
 namespace SkyBlueSoftware.Events.Test
 {
