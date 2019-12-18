@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SkyBlueSoftware.Events</id>
+    <version>0.0.1</version>
+    <authors>Sky Blue Software</authors>
+    <owners>Sky Blue Software</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">LICENSE</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <projectUrl>https://github.com/robinsbs/events</projectUrl>
+    <description>An event framework for .NET Core client applications.</description>
+    <copyright>Copyright (c) 2019 Sky Blue Software</copyright>
+    <repository url="https://github.com/robinsbs/events" />
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.0" />
+    </dependencies>
+  </metadata>
+</package>
