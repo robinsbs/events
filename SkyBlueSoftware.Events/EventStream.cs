@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SkyBlueSoftware.Events
@@ -13,6 +14,7 @@ namespace SkyBlueSoftware.Events
             subscriptions = new ISubscription[] { };
         }
 
+        public EventStream Initialize(params ISubscribeTo[] subscribers) => Initialize(subscribers.AsEnumerable());
         public EventStream Initialize(IEnumerable<ISubscribeTo> subscribers)
         {
             subscriptions = subscribers.CreateSubscriptions();
