@@ -38,9 +38,13 @@ class DetailViewModel : ViewModelBase, ISubscribeTo<SelectedEvent>
     public void Change() => events.Publish(new ChangedEvent());
 }
 
-abstract class ViewModelBase
+class ViewModelBase
 {
     public ViewModelBase() => Message = string.Empty;
     public string Message { get; private set; }
-    protected async Task Log(object e) { Message = $"{GetType().Name} received {e?.GetType().Name}"; await Task.CompletedTask; }
+    protected async Task Log(object e) 
+    { 
+        Message = $"{GetType().Name} received {e?.GetType().Name}"; 
+        await Task.CompletedTask; 
+    }
 }
