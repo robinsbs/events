@@ -18,6 +18,9 @@ namespace SkyBlueSoftware.Events.Test.NuGet
         [TestMethod]
         public async Task EventStream_Tests_NuGet_Test01()
         {
+            var events = new EventStream();
+            Assert.IsNotNull(events);
+            await Task.CompletedTask;
         }
     }
 }
