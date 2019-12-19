@@ -11,7 +11,7 @@
     <Authors>Sky Blue Software</Authors>
     <Company>Sky Blue Software</Company>
     <Product>Sky Blue Software - Events</Product>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/robinsbs/events</PackageProjectUrl>
     <RepositoryUrl>https://github.com/robinsbs/events</RepositoryUrl>
   </PropertyGroup>
@@ -20,12 +20,5 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
 
 </Project>
