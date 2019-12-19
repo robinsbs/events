@@ -12,6 +12,7 @@
     <Company>Sky Blue Software</Company>
     <Product>Sky Blue Software - Events</Product>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageIcon>icon.jpeg</PackageIcon>    
     <PackageProjectUrl>https://github.com/robinsbs/events</PackageProjectUrl>
     <RepositoryUrl>https://github.com/robinsbs/events</RepositoryUrl>
   </PropertyGroup>
@@ -23,6 +24,10 @@
 
   <ItemGroup>
     <None Include="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="icon.jpeg">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
