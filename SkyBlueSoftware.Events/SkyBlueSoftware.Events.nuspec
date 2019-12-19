@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>SkyBlueSoftware.Events</id>
-    <!--<version>0.0.2</version>--><!-- NOTE: the version number is defined in the Azure Pipeline definition -->
+    <version>0.0.2</version><!-- NOTE: this version number can be overridden in the NuGet pack task of the Azure Pipeline definition -->
     <authors>Sky Blue Software</authors>
     <owners>Sky Blue Software</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
