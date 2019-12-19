@@ -14,6 +14,9 @@ ISubscribeTo<TEventStream, TEvent>
 
 ToDo
 
+figure out how to include dll in nuget package
+fix nuget badge on github page
+create tests against latest nuget package
 fix circular dependency issue... EventStream depends on all subscribers -> Subscriber depends on EventStream
 create extension methods that get the event type(s) from an instance
 create extension methods that get the event type(s) from a type
