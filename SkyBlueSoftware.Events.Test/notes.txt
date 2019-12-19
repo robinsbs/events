@@ -14,7 +14,8 @@ ISubscribeTo<TEventStream, TEvent>
 
 ToDo
 
-figure out how to include dll in nuget package
+implement all tests on nuget package
+make sure it's easy to do a release build by changing the build variable
 fix nuget badge on github page
 create tests against latest nuget package
 fix circular dependency issue... EventStream depends on all subscribers -> Subscriber depends on EventStream
