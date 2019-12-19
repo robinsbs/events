@@ -6,7 +6,7 @@
     <authors>Sky Blue Software</authors>
     <owners>Sky Blue Software</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <license type="file">LICENSE</license>
+    <license type="file">LICENSE.txt</license>
     <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
     <projectUrl>https://github.com/robinsbs/events</projectUrl>
     <description>An event framework for .NET Core client applications.</description>
@@ -17,6 +17,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="LICENSE" target="" />
+    <file src="LICENSE.txt" target="" />
   </files>
 </package>
