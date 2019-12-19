@@ -16,9 +16,6 @@
     <dependencies>
       <group targetFramework=".NETCoreApp3.0" />
     </dependencies>
-    <references>
-      <reference file="SkyBlueSoftware.Events.dll" />
-    </references>
   </metadata>
   <files>
     <file src="bin\$configuration$\netcoreapp3.0\SkyBlueSoftware.Events.dll" target="" />
