@@ -3,6 +3,7 @@
   <metadata>
     <id>SkyBlueSoftware.Events</id>
     <version>0.0.2</version><!-- NOTE: this version number can be overridden in the NuGet pack task of the Azure Pipeline definition -->
+    <icon>icon.jpeg</icon>
     <authors>Sky Blue Software</authors>
     <owners>Sky Blue Software</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
