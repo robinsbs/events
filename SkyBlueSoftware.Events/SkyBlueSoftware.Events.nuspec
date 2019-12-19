@@ -18,6 +18,7 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="icon.jpeg" target="" />
     <file src="LICENSE.txt" target="" />
   </files>
 </package>
