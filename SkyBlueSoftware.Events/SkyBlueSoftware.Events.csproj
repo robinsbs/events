@@ -7,7 +7,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Copyright>Copyright (c) 2019 Sky Blue Software</Copyright>
     <Description>An event framework for .NET Core client applications.</Description>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Authors>Sky Blue Software</Authors>
     <Company>Sky Blue Software</Company>
     <Product>Sky Blue Software - Events</Product>
