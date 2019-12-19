@@ -7,7 +7,8 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Copyright>Copyright (c) 2019 Sky Blue Software</Copyright>
     <Description>An event framework for .NET Core client applications.</Description>
-    <VersionPrefix>0.0.2</VersionPrefix>
+    <Version>0.0.2</Version>
+    <VersionPrefix Condition="'$(IsPrerelease)' == 'true'">$(Version).$(Build_BuildId)</VersionPrefix>
     <VersionSuffix Condition="'$(IsPrerelease)' == 'true'">CI-$(Build_BuildId)</VersionSuffix>
     <Authors>Sky Blue Software</Authors>
     <Company>Sky Blue Software</Company>
