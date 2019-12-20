@@ -1,25 +1,5 @@
-﻿Composable Event Stream
+﻿ToDo
 
-var events = EventStream.Create<TEventBase>();
-var subscriberA = new SubscriberA();
-var subscriberB = new SubscriberB();
-var subscriptionA = events.Subscribe<TEventA>(subscriberA);
-var subscriptionB = events.Subscribe<TEventB>(subscriberB);
-
-Multiple event streams that can communicate back and forth by forwarding events
-ISubscribeTo<T>
-ISubscribeConfigurableTo<T> : ISubscribeTo<T> // allows subscriber to configure the subscription at startup and pause/restart events etc.
-
-ISubscribeTo<TEventStream, TEvent>
-
-ToDo
-
-implement all tests on nuget package
-make sure it's easy to do a release build by changing the build variable
-create tests against latest nuget package
-fix circular dependency issue... EventStream depends on all subscribers -> Subscriber depends on EventStream
-create extension methods that get the event type(s) from an instance
-create extension methods that get the event type(s) from a type
 try to allow multiple event streams to coexist
 try to allow one event stream to forward events to another event stream
 Unsubscribe() should flip a bit... not remove from the dictionary... that way Resubscribe() could also be implemented
@@ -32,6 +12,3 @@ Publish<>()
 Support Publish cancellation
 Support ISubscriptions<> injection for subscription management
 Support Publish progress indicator
-
-Test Output
-
