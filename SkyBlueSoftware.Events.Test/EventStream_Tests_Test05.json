@@ -1,12 +1,12 @@
 [
   {
-    "Subscriber": "SkyBlueSoftware.Events.Test.D, SkyBlueSoftware.Events.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "Event": "SkyBlueSoftware.Events.Test.IE, SkyBlueSoftware.Events.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Subscriber": "SkyBlueSoftware.Events.Test.EventStream_Tests+D, SkyBlueSoftware.Events.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Event": "SkyBlueSoftware.Events.Test.EventStream_Tests+IE, SkyBlueSoftware.Events.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
     "CallCount": 2
   },
   {
-    "Subscriber": "SkyBlueSoftware.Events.Test.D, SkyBlueSoftware.Events.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "Event": "SkyBlueSoftware.Events.Test.E2, SkyBlueSoftware.Events.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Subscriber": "SkyBlueSoftware.Events.Test.EventStream_Tests+D, SkyBlueSoftware.Events.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Event": "SkyBlueSoftware.Events.Test.EventStream_Tests+E2, SkyBlueSoftware.Events.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
     "CallCount": 1
   }
 ]

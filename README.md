@@ -3,7 +3,6 @@ An event framework for .NET Core client applications.
 
 [![Build status](https://dev.azure.com/skybluesoftware/SBS/_apis/build/status/SkyBlueSoftware.Events)](https://dev.azure.com/skybluesoftware/SBS/_build/latest?definitionId=8)
 [![Nuget](https://img.shields.io/nuget/v/SkyBlueSoftware.Events)](https://www.nuget.org/packages/SkyBlueSoftware.Events)
-[![SkyBlueSoftware.Events on fuget.org](https://www.fuget.org/packages/SkyBlueSoftware.Events/badge.svg)](https://www.fuget.org/packages/SkyBlueSoftware.Events)
 
 ```C#
 using System.Threading.Tasks;

@@ -1,0 +1,7 @@
+[
+  {
+    "Subscriber": "SkyBlueSoftware.Events.Test.NuGet.EventStream_Tests_NuGet+C, SkyBlueSoftware.Events.Test.NuGet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Event": "SkyBlueSoftware.Events.Test.NuGet.EventStream_Tests_NuGet+E2, SkyBlueSoftware.Events.Test.NuGet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "CallCount": 1
+  }
+]

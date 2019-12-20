@@ -1,0 +1,12 @@
+[
+  {
+    "Subscriber": "SkyBlueSoftware.Events.Test.NuGet.EventStream_Tests_NuGet+A, SkyBlueSoftware.Events.Test.NuGet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Event": "SkyBlueSoftware.Events.Test.NuGet.EventStream_Tests_NuGet+E, SkyBlueSoftware.Events.Test.NuGet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "CallCount": 1
+  },
+  {
+    "Subscriber": "SkyBlueSoftware.Events.Test.NuGet.EventStream_Tests_NuGet+B, SkyBlueSoftware.Events.Test.NuGet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Event": "SkyBlueSoftware.Events.Test.NuGet.EventStream_Tests_NuGet+E, SkyBlueSoftware.Events.Test.NuGet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "CallCount": 1
+  }
+]
