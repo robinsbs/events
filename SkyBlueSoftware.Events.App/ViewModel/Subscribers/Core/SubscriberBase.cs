@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-namespace SkyBlueSoftware.Events.App
+namespace SkyBlueSoftware.Events.ViewModel
 {
     public abstract class SubscriberBase
     {

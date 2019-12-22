@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SkyBlueSoftware.Events.App
+namespace SkyBlueSoftware.Events.ViewModel
 {
     public class Body : ViewModelBase
     {

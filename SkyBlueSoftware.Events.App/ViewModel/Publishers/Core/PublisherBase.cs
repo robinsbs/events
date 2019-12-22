@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace SkyBlueSoftware.Events.App
+namespace SkyBlueSoftware.Events.ViewModel
 {
     public abstract class PublisherBase : ViewModelBase
     {

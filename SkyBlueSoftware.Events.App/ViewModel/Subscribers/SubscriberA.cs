@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace SkyBlueSoftware.Events.App
+namespace SkyBlueSoftware.Events.ViewModel
 {
     public class SubscriberA : SubscriberBase, ISubscribeTo<Event1>
     {

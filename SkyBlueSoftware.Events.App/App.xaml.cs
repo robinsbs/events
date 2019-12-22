@@ -1,8 +1,9 @@
 ﻿using Autofac;
+using SkyBlueSoftware.Events.ViewModel;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace SkyBlueSoftware.Events.App
+namespace SkyBlueSoftware.Events.View
 {
     public partial class App : Application
     {

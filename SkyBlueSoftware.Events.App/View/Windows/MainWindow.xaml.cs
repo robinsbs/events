@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace SkyBlueSoftware.Events.App
+namespace SkyBlueSoftware.Events.View
 {
     public partial class MainWindow : Window
     {

@@ -1,4 +1,4 @@
-﻿namespace SkyBlueSoftware.Events.App
+﻿namespace SkyBlueSoftware.Events.ViewModel
 {
     public class Publisher2 : PublisherBase
     {
