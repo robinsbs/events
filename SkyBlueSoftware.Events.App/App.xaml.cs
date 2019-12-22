@@ -10,6 +10,7 @@ namespace SkyBlueSoftware.Events.View
         protected override void OnStartup(StartupEventArgs e)
         {
             var b = new ContainerBuilder();
+            //b.RegisterEvents();
             b.RegisterType<EventStream>().SingleInstance().AsImplementedInterfaces().AsSelf();
             b.RegisterAssemblyTypes(typeof(SubscriberBase).Assembly)
                 .Where(t => t.IsSubclassOf(typeof(SubscriberBase)))
@@ -25,6 +26,7 @@ namespace SkyBlueSoftware.Events.View
             b.RegisterType<Main>().SingleInstance();
             var c = b.Build();
             c.Resolve<EventStream>().Initialize(c.Resolve<IEnumerable<ISubscribeTo>>());
+            //c.InitializeEvents();
             var mainWindow = new MainWindow();
             mainWindow.DataContext = c.Resolve<Main>();
             mainWindow.Show();

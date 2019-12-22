@@ -1,5 +1,7 @@
 ﻿ToDo
 
+change IEventStream to accept args as input to Publish method
+implement IRegister
 try to allow multiple event streams to coexist
 try to allow one event stream to forward events to another event stream
 Unsubscribe() should flip a bit... not remove from the dictionary... that way Resubscribe() could also be implemented

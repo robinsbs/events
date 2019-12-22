@@ -44,5 +44,11 @@ namespace SkyBlueSoftware.Events
         {
             return subscribers.SelectMany(x => x.CreateSubscriptions()).ToArray();
         }
+
+        public static string Delimit<T>(this IEnumerable<T> source, string delimiter)
+        {
+            if (source == null) return string.Empty;
+            return string.Join(delimiter, source);
+        }
     }
 }
