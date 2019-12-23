@@ -19,8 +19,8 @@ public class EventStream_Usage
     }
 }
 
-class SelectedEvent { }
-class ChangedEvent { }
+public class SelectedEvent { }
+public class ChangedEvent { }
 
 class ListViewModel : ViewModelBase, ISubscribeTo<ChangedEvent>
 {
