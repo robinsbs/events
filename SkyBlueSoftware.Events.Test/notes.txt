@@ -4,6 +4,7 @@ change IEventStream to accept args as input to Publish method
 implement IRegister
 change Subscriber logic to use events to respond to the delay changes
 change event stream logic to allow wait cursor notification when events are being processed and have not finished yet
+remove as much 'public' surface area as possible
 try to allow multiple event streams to coexist
 try to allow one event stream to forward events to another event stream
 Unsubscribe() should flip a bit... not remove from the dictionary... that way Resubscribe() could also be implemented

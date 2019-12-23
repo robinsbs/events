@@ -22,7 +22,6 @@ namespace SkyBlueSoftware.Events.ViewModel
         {
             if (int.TryParse(Delay, out var delay)) await Task.Delay(delay);
             Log.Insert(0, $"{++counter} - Received event {e?.GetType().Name}");
-            await Task.CompletedTask;
         }
     }
 }
