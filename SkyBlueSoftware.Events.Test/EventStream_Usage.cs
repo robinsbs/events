@@ -27,7 +27,7 @@ class ListViewModel : ViewModelBase, ISubscribeTo<ChangedEvent>
     private readonly IEventStream events;
     public ListViewModel(IEventStream events) { this.events = events; }
     public async Task On(ChangedEvent e) => await Log(e);
-    public void Select() => events.Publish(new SelectedEvent());
+    public void Select() => events.Publish<SelectedEvent>();
 }
 
 class DetailViewModel : ViewModelBase, ISubscribeTo<SelectedEvent>
@@ -35,7 +35,7 @@ class DetailViewModel : ViewModelBase, ISubscribeTo<SelectedEvent>
     private readonly IEventStream events;
     public DetailViewModel(IEventStream events) { this.events = events; }
     public async Task On(SelectedEvent e) => await Log(e);
-    public void Change() => events.Publish(new ChangedEvent());
+    public void Change() => events.Publish<ChangedEvent>();
 }
 
 class ViewModelBase

@@ -20,7 +20,7 @@ namespace SkyBlueSoftware.Events.Test
         public async Task EventStream_Tests_Test01()
         {
             var events = ES(new A(), new B());
-            await events.Publish(new E1());
+            await events.Publish<E1>();
             t.Verify(events);
         }
 
@@ -29,7 +29,7 @@ namespace SkyBlueSoftware.Events.Test
         {
             var events = ES(new A(), new B());
             events.Where(x => x.Subscriber == typeof(A)).ForEach(x => x.Unsubscribe());
-            await events.Publish(new E());
+            await events.Publish<E>();
             t.Verify(events);
         }
 
@@ -37,7 +37,7 @@ namespace SkyBlueSoftware.Events.Test
         public async Task EventStream_Tests_Test03()
         {
             var events = ES(new C());
-            await events.Publish(new E2());
+            await events.Publish<E2>();
             t.Verify(events);
         }
 
@@ -45,7 +45,7 @@ namespace SkyBlueSoftware.Events.Test
         public async Task EventStream_Tests_Test04()
         {
             var events = ES(new C());
-            await events.Publish(new E());
+            await events.Publish<E>();
             t.Verify(events);
         }
 
@@ -53,9 +53,9 @@ namespace SkyBlueSoftware.Events.Test
         public async Task EventStream_Tests_Test05()
         {
             var events = ES(new D());
-            await events.Publish(new E1());
-            await events.Publish(new E2());
-            await events.Publish(new E3());
+            await events.Publish<E1>();
+            await events.Publish<E2>();
+            await events.Publish<E3>();
             t.Verify(events);
         }
 
@@ -64,7 +64,7 @@ namespace SkyBlueSoftware.Events.Test
         {
             var events = ES(new A(), new B());
             events.Where(x => x.Subscriber == typeof(A)).FirstOrDefault().Unsubscribe().Resubscribe();
-            await events.Publish(new E());
+            await events.Publish<E>();
             t.Verify(events);
         }
 

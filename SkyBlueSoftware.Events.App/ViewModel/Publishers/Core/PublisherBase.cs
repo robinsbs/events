@@ -4,7 +4,7 @@ namespace SkyBlueSoftware.Events.ViewModel
 {
     public abstract class PublisherBase : ViewModelBase
     {
-        private readonly IEventStream events;
+        protected readonly IEventStream events;
 
         public PublisherBase(IEventStream events)
         {
@@ -13,8 +13,6 @@ namespace SkyBlueSoftware.Events.ViewModel
 
         public string Label => $"{GetType().Name} {Name}";
         public abstract string Name { get; }
-        public ICommand PublishCommand => Do(async () => await events.Publish(CreateEvent()));
-
-        protected abstract object CreateEvent();
+        public abstract ICommand PublishCommand { get; }
     }
 }

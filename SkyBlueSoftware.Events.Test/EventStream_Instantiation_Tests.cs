@@ -36,7 +36,7 @@ namespace SkyBlueSoftware.Events.Test
                 this.events = events;
             }
 
-            public async Task Select() => await events.Publish(new E());
+            public async Task Select() => await events.Publish<E>();
         }
         
         public class B : ISubscribeTo<E>

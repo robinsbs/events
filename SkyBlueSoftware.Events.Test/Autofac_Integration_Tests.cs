@@ -74,7 +74,7 @@ namespace SkyBlueSoftware.Events.Test
 
             public async Task Publish<T>(params object[] args)
             {
-                await events.Publish(Create<T>(args));
+                await events.Publish<T>(args);
             }
         }
 

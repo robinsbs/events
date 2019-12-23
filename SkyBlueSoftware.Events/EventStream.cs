@@ -23,15 +23,11 @@ namespace SkyBlueSoftware.Events
             return this;
         }
 
-        public async Task Publish<T>(T e) 
-        {
-            if (e == null) return;
-            foreach (var o in subscriptions) await o.On(e); 
-        }
-
         public async Task Publish<T>(params object[] args) 
         {
-            foreach (var o in subscriptions) await o.On(container.Create<T>(args)); 
+            var e = await container.Create<T>(args);
+            if (e == null) return;
+            foreach (var o in subscriptions) await o.On(e); 
         }
 
         #region IEnumerable

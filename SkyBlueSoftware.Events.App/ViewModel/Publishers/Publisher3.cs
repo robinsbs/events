@@ -1,9 +1,7 @@
 ﻿namespace SkyBlueSoftware.Events.ViewModel
 {
-    public class Publisher3 : PublisherBase
+    public class Publisher3 : Publisher<Event3>
     {
         public Publisher3(IEventStream events) : base(events) { }
-        public override string Name => nameof(Event3);
-        protected override object CreateEvent() => new Event3();
     }
 }
