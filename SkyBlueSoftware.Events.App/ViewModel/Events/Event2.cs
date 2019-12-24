@@ -1,6 +1,6 @@
 ﻿namespace SkyBlueSoftware.Events.ViewModel
 {
-    public class Event2
+    public class Event2 : IRequireRegistrationNew
     {
 
     }

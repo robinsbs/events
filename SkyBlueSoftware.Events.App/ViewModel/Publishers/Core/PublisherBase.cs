@@ -2,7 +2,7 @@
 
 namespace SkyBlueSoftware.Events.ViewModel
 {
-    public abstract class PublisherBase : ViewModelBase
+    public abstract class PublisherBase : ViewModelBase, IPublisher
     {
         protected readonly IEventStream events;
 

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SkyBlueSoftware.Events.ViewModel
 {
-    public abstract class SubscriberBase
+    public abstract class SubscriberBase : ISubscriber
     {
         private int counter;
 

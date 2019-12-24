@@ -1,6 +1,6 @@
 ﻿namespace SkyBlueSoftware.Events.ViewModel
 {
-    public class Main
+    public class Main : ViewModelBase, IRequireRegistration
     {
         public Main(Body body)
         {

@@ -2,15 +2,15 @@
 
 namespace SkyBlueSoftware.Events.ViewModel
 {
-    public class Body : ViewModelBase
+    public class Body : ViewModelBase, IRequireRegistration
     {
-        public Body(IEnumerable<PublisherBase> publishers, IEnumerable<SubscriberBase> subscribers)
+        public Body(IEnumerable<IPublisher> publishers, IEnumerable<ISubscriber> subscribers)
         {
             Publishers = publishers;
             Subscribers = subscribers;
         }
 
-        public IEnumerable<PublisherBase> Publishers { get; }
-        public IEnumerable<SubscriberBase> Subscribers { get; }
+        public IEnumerable<IPublisher> Publishers { get; }
+        public IEnumerable<ISubscriber> Subscribers { get; }
     }
 }
