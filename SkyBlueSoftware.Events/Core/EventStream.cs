@@ -10,7 +10,7 @@ namespace SkyBlueSoftware.Events
         private IEnumerable<ISubscription> subscriptions;
         private readonly IDependencyContainer container;
 
-        public EventStream(IDependencyContainer? container = null)
+        public EventStream(IDependencyContainer container = null)
         {
             subscriptions = new ISubscription[] { };
             this.container = container ?? new DefaultDependencyContainer();
