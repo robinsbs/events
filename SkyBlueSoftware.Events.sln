@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.App"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{73EA29C2-500F-4EAD-A0D1-265D63866615}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.ViewModel", "SkyBlueSoftware.Events.ViewModel\SkyBlueSoftware.Events.ViewModel.csproj", "{26809FA1-4B18-4EB9-BC2C-AF9EC6EC2CF1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.Test.NuGet", "SkyBlueSoftware.Events.Test.NuGet\SkyBlueSoftware.Events.Test.NuGet.csproj", "{61AF9E0D-1A94-4172-AEED-E24CFD1A2444}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.TestFramework", "SkyBlueSoftware.TestFramework\SkyBlueSoftware.TestFramework.csproj", "{09E86984-D006-46CB-8770-F562604B4C02}"
@@ -42,10 +40,6 @@ Global
 		{F4C2804D-04B8-4749-866A-0019EE633D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4C2804D-04B8-4749-866A-0019EE633D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4C2804D-04B8-4749-866A-0019EE633D16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{26809FA1-4B18-4EB9-BC2C-AF9EC6EC2CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26809FA1-4B18-4EB9-BC2C-AF9EC6EC2CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26809FA1-4B18-4EB9-BC2C-AF9EC6EC2CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26809FA1-4B18-4EB9-BC2C-AF9EC6EC2CF1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{61AF9E0D-1A94-4172-AEED-E24CFD1A2444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{61AF9E0D-1A94-4172-AEED-E24CFD1A2444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61AF9E0D-1A94-4172-AEED-E24CFD1A2444}.Release|Any CPU.ActiveCfg = Release|Any CPU
