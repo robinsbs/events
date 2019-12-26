@@ -51,30 +51,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\Body.cs" />
-    <Compile Include="ViewModel\Core\Interfaces\IRequireRegistration.cs" />
-    <Compile Include="ViewModel\Core\Interfaces\IRequireRegistrationNew.cs" />
-    <Compile Include="ViewModel\Core\ViewModelBase.cs" />
-    <Compile Include="ViewModel\Core\ViewModelBaseCommand.cs" />
-    <Compile Include="ViewModel\Events\Event1.cs" />
-    <Compile Include="ViewModel\Events\Event2.cs" />
-    <Compile Include="ViewModel\Events\Event3.cs" />
-    <Compile Include="ViewModel\Events\Event4.cs" />
-    <Compile Include="ViewModel\Main.cs" />
-    <Compile Include="ViewModel\Publishers\Core\IPublisher.cs" />
-    <Compile Include="ViewModel\Publishers\Core\Publisher.cs" />
-    <Compile Include="ViewModel\Publishers\Core\PublisherBase.cs" />
-    <Compile Include="ViewModel\Publishers\Publisher1.cs" />
-    <Compile Include="ViewModel\Publishers\Publisher2.cs" />
-    <Compile Include="ViewModel\Publishers\Publisher3.cs" />
-    <Compile Include="ViewModel\Publishers\Publisher4.cs" />
-    <Compile Include="ViewModel\Subscribers\Core\ISubscriber.cs" />
-    <Compile Include="ViewModel\Subscribers\Core\SubscriberBase.cs" />
-    <Compile Include="ViewModel\Subscribers\SubscriberA.cs" />
-    <Compile Include="ViewModel\Subscribers\SubscriberB.cs" />
-    <Compile Include="ViewModel\Subscribers\SubscriberC.cs" />
-    <Compile Include="ViewModel\Subscribers\SubscriberD.cs" />
-    <Compile Include="ViewModel\Subscribers\SubscriberE.cs" />
     <Compile Include="View\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -132,6 +108,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SkyBlueSoftware.Events.ViewModel\SkyBlueSoftware.Events.ViewModel.csproj">
+      <Project>{6568e449-1a7d-4b90-a44e-96bcec6252fd}</Project>
+      <Name>SkyBlueSoftware.Events.ViewModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SkyBlueSoftware.Events\SkyBlueSoftware.Events.csproj">
       <Project>{9bba3b0a-c428-4fe0-a5cf-9a650e886a81}</Project>
       <Name>SkyBlueSoftware.Events</Name>

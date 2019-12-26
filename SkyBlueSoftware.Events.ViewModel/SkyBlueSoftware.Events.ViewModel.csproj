@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6568E449-1A7D-4B90-A44E-96BCEC6252FD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SkyBlueSoftware.Events.ViewModel</RootNamespace>
+    <AssemblyName>SkyBlueSoftware.Events.ViewModel</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Body.cs" />
+    <Compile Include="Core\Interfaces\IRequireRegistration.cs" />
+    <Compile Include="Core\Interfaces\IRequireRegistrationNew.cs" />
+    <Compile Include="Core\ViewModelBase.cs" />
+    <Compile Include="Core\ViewModelBaseCommand.cs" />
+    <Compile Include="Events\Event1.cs" />
+    <Compile Include="Events\Event2.cs" />
+    <Compile Include="Events\Event3.cs" />
+    <Compile Include="Events\Event4.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publishers\Core\IPublisher.cs" />
+    <Compile Include="Publishers\Core\Publisher.cs" />
+    <Compile Include="Publishers\Core\PublisherBase.cs" />
+    <Compile Include="Publishers\Publisher1.cs" />
+    <Compile Include="Publishers\Publisher2.cs" />
+    <Compile Include="Publishers\Publisher3.cs" />
+    <Compile Include="Publishers\Publisher4.cs" />
+    <Compile Include="Subscribers\Core\ISubscriber.cs" />
+    <Compile Include="Subscribers\Core\SubscriberBase.cs" />
+    <Compile Include="Subscribers\SubscriberA.cs" />
+    <Compile Include="Subscribers\SubscriberB.cs" />
+    <Compile Include="Subscribers\SubscriberC.cs" />
+    <Compile Include="Subscribers\SubscriberD.cs" />
+    <Compile Include="Subscribers\SubscriberE.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SkyBlueSoftware.Events\SkyBlueSoftware.Events.csproj">
+      <Project>{9bba3b0a-c428-4fe0-a5cf-9a650e886a81}</Project>
+      <Name>SkyBlueSoftware.Events</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

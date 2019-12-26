@@ -14,18 +14,18 @@ namespace SkyBlueSoftware.Events.View
         {
             new MainWindow
             {
-                DataContext = new ContainerBuilder().RegisterAllTypes(this)
-                                                                 .Build()
-                                                                 .InitializeEvents()
-                                                                 .Resolve<Main>()
+                DataContext = new ContainerBuilder().RegisterAllTypes<Main>()
+                                                    .Build()
+                                                    .InitializeEvents()
+                                                    .Resolve<Main>()
             }.Show();
         }
     }
 
     public static class AutofacExtensions
     {
-        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params object[] instances) => RegisterAllTypes(b, instances.SelectMany(x => x.GetType().Assembly.GetTypes()));
-        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params Type[] allTypes) => RegisterAllTypes(b, allTypes);
+        public static ContainerBuilder RegisterAllTypes<T>(this ContainerBuilder b) => RegisterAllTypes(b, typeof(T).Assembly.GetTypes());
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params Type[] allTypes) => RegisterAllTypes(b, allTypes.AsEnumerable());
         public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, IEnumerable<Type> allTypes)
         {
             var types = allTypes.Where(x => x.IsAssignableTo<IRequireRegistration>())
