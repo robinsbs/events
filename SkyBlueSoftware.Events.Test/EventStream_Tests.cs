@@ -1,6 +1,9 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SkyBlueSoftware.Events.Autofac;
 using SkyBlueSoftware.TestFramework;
 
 namespace SkyBlueSoftware.Events.Test
@@ -19,7 +22,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test01()
         {
-            var events = ES(new A(), new B());
+            var events = CE(typeof(A), typeof(B), typeof(E1));
             await events.Publish<E1>();
             t.Verify(events);
         }
@@ -27,7 +30,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test02()
         {
-            var events = ES(new A(), new B());
+            var events = CE(typeof(A), typeof(B), typeof(E));
             events.Where(x => x.Subscriber == typeof(A)).ForEach(x => x.Unsubscribe());
             await events.Publish<E>();
             t.Verify(events);
@@ -36,7 +39,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test03()
         {
-            var events = ES(new C());
+            var events = CE(typeof(C), typeof(E2));
             await events.Publish<E2>();
             t.Verify(events);
         }
@@ -44,7 +47,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test04()
         {
-            var events = ES(new C());
+            var events = CE(typeof(C), typeof(E));
             await events.Publish<E>();
             t.Verify(events);
         }
@@ -52,7 +55,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test05()
         {
-            var events = ES(new D());
+            var events = CE(typeof(D), typeof(E1), typeof(E2), typeof(E3));
             await events.Publish<E1>();
             await events.Publish<E2>();
             await events.Publish<E3>();
@@ -62,7 +65,7 @@ namespace SkyBlueSoftware.Events.Test
         [TestMethod]
         public async Task EventStream_Tests_Test06()
         {
-            var events = ES(new A(), new B());
+            var events = CE(typeof(A), typeof(B), typeof(E));
             events.Where(x => x.Subscriber == typeof(A)).FirstOrDefault().Unsubscribe().Resubscribe();
             await events.Publish<E>();
             t.Verify(events);
@@ -89,33 +92,39 @@ namespace SkyBlueSoftware.Events.Test
             await Task.CompletedTask.Async();
         }
 
-        public class A : ISubscribeTo<E>
+        public class A : ISubscribeTo<E>, IRequireRegistration
         {
             public async Task On(E e) => await Task.CompletedTask;
         }
 
-        public class B : ISubscribeTo<E>
+        public class B : ISubscribeTo<E>, IRequireRegistration
         {
             public async Task On(E e) => await Task.CompletedTask;
         }
 
-        public class C : ISubscribeTo<E2>
+        public class C : ISubscribeTo<E2>, IRequireRegistration
         {
             public async Task On(E2 e) => await Task.CompletedTask;
         }
 
-        public class D : ISubscribeTo<IE>, ISubscribeTo<E2>
+        public class D : ISubscribeTo<IE>, ISubscribeTo<E2>, IRequireRegistration
         {
             public async Task On(IE e) => await Task.CompletedTask;
             public async Task On(E2 e) => await Task.CompletedTask;
         }
 
         public interface IE { }
-        public class E { }
+        public class E : IRequireRegistrationNew { }
         public class E1 : E, IE { }
         public class E2 : E { }
         public class E3 : E, IE { }
 
-        private static EventStream ES(params ISubscribeTo[] subscribers) => new EventStream().Initialize(subscribers);
+        public static IEventStream CE(params Type[] types)
+        {
+            return new ContainerBuilder().RegisterAllTypes(types)
+                                         .Build()
+                                         .InitializeEvents()
+                                         .Resolve<IEventStream>();
+        }
     }
 }

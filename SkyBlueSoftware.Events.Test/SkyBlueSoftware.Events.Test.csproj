@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SkyBlueSoftware.Events.Autofac\SkyBlueSoftware.Events.Autofac.csproj" />
     <ProjectReference Include="..\SkyBlueSoftware.Events\SkyBlueSoftware.Events.csproj" />
     <ProjectReference Include="..\SkyBlueSoftware.TestFramework\SkyBlueSoftware.TestFramework.csproj" />
   </ItemGroup>
