@@ -11,7 +11,7 @@
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
-    <PackageReference Include="SkyBlueSoftware.Events" Version="0.0.4" />
+    <PackageReference Include="SkyBlueSoftware.Events" Version="0.0.4.261-CI-261" />
   </ItemGroup>
 
   <ItemGroup>
