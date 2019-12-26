@@ -11,10 +11,10 @@ namespace SkyBlueSoftware.Events.View
         {
             new MainWindow
             {
-                DataContext = new ContainerBuilder().RegisterAllTypes<Main>()
-                                                    .Build()
-                                                    .InitializeEvents()
-                                                    .Resolve<Main>()
+                DataContext = SkyBlueSoftwareEvents.RegisterAllTypes<Main>()
+                                                   .Build()
+                                                   .InitializeEvents()
+                                                   .Resolve<Main>()
             }.Show();
         }
     }

@@ -121,10 +121,10 @@ namespace SkyBlueSoftware.Events.Test
 
         public static IEventStream CE(params Type[] types)
         {
-            return new ContainerBuilder().RegisterAllTypes(types)
-                                         .Build()
-                                         .InitializeEvents()
-                                         .Resolve<IEventStream>();
+            return SkyBlueSoftwareEvents.RegisterAllTypes(types)
+                                        .Build()
+                                        .InitializeEvents()
+                                        .Resolve<IEventStream>();
         }
     }
 }
