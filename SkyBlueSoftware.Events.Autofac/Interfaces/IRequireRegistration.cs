@@ -1,4 +1,4 @@
-﻿namespace SkyBlueSoftware.Events.ViewModel
+﻿namespace SkyBlueSoftware.Events.Autofac
 {
     public interface IRequireRegistration
     {

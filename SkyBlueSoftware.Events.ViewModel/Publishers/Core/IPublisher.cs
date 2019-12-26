@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using SkyBlueSoftware.Events.Autofac;
+using System.Windows.Input;
 
 namespace SkyBlueSoftware.Events.ViewModel
 {

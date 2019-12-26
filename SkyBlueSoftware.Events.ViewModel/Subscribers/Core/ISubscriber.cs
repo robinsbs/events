@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using SkyBlueSoftware.Events.Autofac;
+using System.Collections.ObjectModel;
 
 namespace SkyBlueSoftware.Events.ViewModel
 {

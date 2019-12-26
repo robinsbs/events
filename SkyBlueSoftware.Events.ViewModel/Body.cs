@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SkyBlueSoftware.Events.Autofac;
 
 namespace SkyBlueSoftware.Events.ViewModel
 {

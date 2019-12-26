@@ -37,8 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Body.cs" />
-    <Compile Include="Core\Interfaces\IRequireRegistration.cs" />
-    <Compile Include="Core\Interfaces\IRequireRegistrationNew.cs" />
     <Compile Include="Core\ViewModelBase.cs" />
     <Compile Include="Core\ViewModelBaseCommand.cs" />
     <Compile Include="Events\Event1.cs" />
@@ -63,6 +61,10 @@
     <Compile Include="Subscribers\SubscriberE.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SkyBlueSoftware.Events.Autofac\SkyBlueSoftware.Events.Autofac.csproj">
+      <Project>{7FEA7C71-1F14-4227-86E3-42CF16F47A21}</Project>
+      <Name>SkyBlueSoftware.Events.Autofac</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SkyBlueSoftware.Events\SkyBlueSoftware.Events.csproj">
       <Project>{9bba3b0a-c428-4fe0-a5cf-9a650e886a81}</Project>
       <Name>SkyBlueSoftware.Events</Name>

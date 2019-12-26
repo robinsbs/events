@@ -108,6 +108,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SkyBlueSoftware.Events.Autofac\SkyBlueSoftware.Events.Autofac.csproj">
+      <Project>{7fea7c71-1f14-4227-86e3-42cf16f47a21}</Project>
+      <Name>SkyBlueSoftware.Events.Autofac</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SkyBlueSoftware.Events.ViewModel\SkyBlueSoftware.Events.ViewModel.csproj">
       <Project>{6568e449-1a7d-4b90-a44e-96bcec6252fd}</Project>
       <Name>SkyBlueSoftware.Events.ViewModel</Name>
