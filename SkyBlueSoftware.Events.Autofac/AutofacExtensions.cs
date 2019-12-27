@@ -7,6 +7,7 @@ namespace SkyBlueSoftware.Events.Autofac
 {
     public static class AutofacExtensions
     {
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, object instance) => RegisterAllTypes(b, instance.GetType().Assembly.GetTypes());
         public static ContainerBuilder RegisterAllTypes<T>(this ContainerBuilder b) => RegisterAllTypes(b, typeof(T).Assembly.GetTypes());
         public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params Type[] allTypes) => RegisterAllTypes(b, allTypes.AsEnumerable());
         public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, IEnumerable<Type> allTypes)
@@ -26,6 +27,9 @@ namespace SkyBlueSoftware.Events.Autofac
             c.Resolve<EventStream>().Initialize(c.Resolve<IEnumerable<ISubscribeTo>>());
             return c;
         }
+
+        public static (T1, T2) Resolve<T1, T2>(this IContainer c) => (c.Resolve<T1>(), c.Resolve<T2>());
+        public static (T1, T2, T3) Resolve<T1, T2, T3>(this IContainer c) => (c.Resolve<T1>(), c.Resolve<T2>(), c.Resolve<T3>());
 
         public static Type[] AsSingleInstance(this IEnumerable<AutofacTypeRegistrationDefinition> types)
         {
