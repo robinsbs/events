@@ -1,0 +1,24 @@
+{
+  "aRead": {
+    "Id": 1,
+    "Name": "a"
+  },
+  "aWrite": {
+    "IsSuccess": true,
+    "Message": "Success"
+  },
+  "bRead": {
+    "Id": "00000000-0000-0000-0000-000000000000",
+    "Value": 7.89
+  },
+  "bWrite": {
+    "IsSuccess": true,
+    "Message": "Success"
+  },
+  "log": [
+    "ALoad => Id=1, Name=a",
+    "BLoad => Id=00000000-0000-0000-0000-000000000000, Value=7.89",
+    "ASave(10, Ten)",
+    "BSave(00000000-0000-0000-0000-000000000000, 1.23)"
+  ]
+}

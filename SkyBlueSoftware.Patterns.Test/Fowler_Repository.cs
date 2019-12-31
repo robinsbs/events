@@ -34,6 +34,30 @@ namespace SkyBlueSoftware.Patterns.Test
             t.Verify(new { aRead, aWrite, bRead, bWrite, log });
         }
 
+
+        [TestMethod]
+        public void Fowler_Repository_UnitOfWork_Example()
+        {
+            var log = new List<string>();
+
+            var storage = new Storage(log);
+            A aRead;
+            WriteResult aWrite;
+            B bRead;
+            WriteResult bWrite;
+            using (var unitOfWork = new UnitOfWork(storage, new List<UnitOfWorkWrite>()))
+            {
+                var repositoryA = new RepositoryA(unitOfWork);
+                var repositoryB = new RepositoryB(unitOfWork);
+                aRead = repositoryA.Read(1);
+                aWrite = repositoryA.Write(new A(10, "Ten"));
+                bRead = repositoryB.Read(Guid.Empty);
+                bWrite = repositoryB.Write(new B(Guid.Empty, 1.23));
+            }
+
+            t.Verify(new { aRead, aWrite, bRead, bWrite, log });
+        }
+
         class A
         {
             public A(int id, string name)
@@ -121,6 +145,46 @@ namespace SkyBlueSoftware.Patterns.Test
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
+        class UnitOfWork : IStorage, IDisposable
+        {
+            private readonly IStorage storage;
+            private readonly IList<UnitOfWorkWrite> writes;
+
+            public UnitOfWork(IStorage storage, IList<UnitOfWorkWrite> writes)
+            {
+                this.storage = storage;
+                this.writes = writes;
+            }
+
+            public IStorageValues[] Query(string command, params object[] args) => storage.Query(command, args);
+            public IStorageValues Read(string command, params object[] args) => storage.Read(command, args);
+            public int Write(string command, params object[] args)
+            {
+                writes.Add(new UnitOfWorkWrite(command, args));
+                return 1;
+            }
+
+            public void Dispose() 
+            {
+                foreach (var write in writes)
+                {
+                    storage.Write(write.Command, write.Args);
+                }
+            }
+        }
+
+        class UnitOfWorkWrite
+        {
+            public UnitOfWorkWrite(string command, object[] args)
+            {
+                Command = command;
+                Args = args;
+            }
+
+            public string Command { get; }
+            public object[] Args { get; }
+        }
+
         interface IRepository<TEntity, TKey>
         {
             TEntity Read(TKey key);
@@ -141,9 +205,9 @@ namespace SkyBlueSoftware.Patterns.Test
         
         class RepositoryA : IRepository<A, int>
         {
-            private readonly Storage storage;
+            private readonly IStorage storage;
 
-            public RepositoryA(Storage storage) => this.storage = storage;
+            public RepositoryA(IStorage storage) => this.storage = storage;
 
             public A Read(int id)
             {
@@ -162,8 +226,8 @@ namespace SkyBlueSoftware.Patterns.Test
 
         class RepositoryB : IRepository<B, Guid>
         {
-            private readonly Storage storage;
-            public RepositoryB(Storage storage) => this.storage = storage;
+            private readonly IStorage storage;
+            public RepositoryB(IStorage storage) => this.storage = storage;
             public B Read(Guid id)
             {
                 var values = storage.Read("BLoad", id);
