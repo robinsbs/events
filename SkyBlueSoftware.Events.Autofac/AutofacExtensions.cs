@@ -7,20 +7,33 @@ namespace SkyBlueSoftware.Events.Autofac
 {
     public static class AutofacExtensions
     {
-        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, object instance) => RegisterAllTypes(b, instance.GetType().Assembly.GetTypes());
-        public static ContainerBuilder RegisterAllTypes<T>(this ContainerBuilder b) => RegisterAllTypes(b, typeof(T).Assembly.GetTypes());
-        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params Type[] allTypes) => RegisterAllTypes(b, allTypes.AsEnumerable());
-        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, IEnumerable<Type> allTypes)
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, object instance, Func<Type, bool> typeSelector = null, Func<Type, bool> newInstanceSelector = null) => RegisterAllTypes(b, instance.GetType().Assembly.GetTypes(), typeSelector, newInstanceSelector);
+        public static ContainerBuilder RegisterAllTypes<T>(this ContainerBuilder b) => RegisterAllTypes(b, typeof(T).Assembly.GetTypes(), null, null);
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params Type[] allTypes) => RegisterAllTypes(b, allTypes.AsEnumerable(), null, null);
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, IEnumerable<Type> allTypes, Func<Type, bool> typeSelector, Func<Type, bool> newInstanceSelector)
         {
-            var types = allTypes.Where(x => x.IsAssignableTo<IRequireRegistration>())
+            var selector = typeSelector ?? (x => x.Is<IRequireRegistration>());
+            var newSelector = newInstanceSelector ?? (x => x.Is<IRequireRegistrationNew>());
+            var types = allTypes.Where(selector)
                                 .Union(new[] { typeof(EventStream), typeof(AutofacDependencyContainer) })
-                                .Select(x => new AutofacTypeRegistrationDefinition(x, x.IsAssignableTo<IRequireRegistrationNew>()))
+                                .Select(x => new AutofacTypeRegistrationDefinition(x, newSelector(x)))
                                 .ToArray();
             b.RegisterTypes(types.AsNew()).AsImplementedInterfaces().AsSelf();
             b.RegisterTypes(types.AsSingleInstance()).AsImplementedInterfaces().AsSelf().SingleInstance();
             b.RegisterContainer();
             return b;
         }
+
+        public static bool Is<T>(this Type type) => type.IsAssignableTo<T>();
+        public static bool Is<T1, T2>(this Type t) => t.Is<T1>() || t.Is<T2>();
+        public static bool Is<T1, T2, T3>(this Type t) => t.Is<T1, T2>() || t.Is<T3>();
+        public static bool Is<T1, T2, T3, T4>(this Type t) => t.Is<T1, T2, T3>() || t.Is<T4>();
+        public static bool Is<T1, T2, T3, T4, T5>(this Type t) => t.Is<T1, T2, T3, T4>() || t.Is<T5>();
+        public static bool Is<T1, T2, T3, T4, T5, T6>(this Type t) => t.Is<T1, T2, T3, T4, T5>() || t.Is<T6>();
+        public static bool Is<T1, T2, T3, T4, T5, T6, T7>(this Type t) => t.Is<T1, T2, T3, T4, T5, T6>() || t.Is<T7>();
+        public static bool Is<T1, T2, T3, T4, T5, T6, T7, T8>(this Type t) => t.Is<T1, T2, T3, T4, T5, T6, T7>() || t.Is<T8>();
+        public static bool Is<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this Type t) => t.Is<T1, T2, T3, T4, T5, T6, T7, T8>() || t.Is<T9>();
+        public static bool Is<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this Type t) => t.Is<T1, T2, T3, T4, T5, T6, T7, T8, T9>() || t.Is<T10>();
 
         public static IContainer InitializeEvents(this IContainer c)
         {
