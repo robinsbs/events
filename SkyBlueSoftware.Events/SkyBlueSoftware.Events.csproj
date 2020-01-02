@@ -6,7 +6,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Copyright>Copyright (c) 2020 Sky Blue Software</Copyright>
     <Description>An event framework for .NET Core client applications.</Description>
-    <IsPrerelease>false</IsPrerelease>
+    <IsPrerelease>true</IsPrerelease>
     <VersionNumber>0.0.5</VersionNumber>
     <Version Condition="'$(IsPrerelease)' == 'false'">$(VersionNumber)</Version>
     <VersionPrefix Condition="'$(IsPrerelease)' == 'true' ">$(VersionNumber).$(Build_BuildId)</VersionPrefix>
@@ -27,9 +27,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=".NETFramework4.6.1" />
-    <PackageReference Include=".NETStandard2.0" />
-    <PackageReference Include=".NETStandard2.1" />
     <None Include="LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>

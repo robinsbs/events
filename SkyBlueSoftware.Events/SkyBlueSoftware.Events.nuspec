@@ -12,6 +12,15 @@
     <description>An event framework for .NET Core client applications.</description>
     <copyright>Copyright (c) 2020 Sky Blue Software</copyright>
     <repository url="https://github.com/robinsbs/events" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1" />
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="NETStandard.Library" version="2.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="NETStandard.Library" version="2.1.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
   </metadata>
   <files>
     <file src="icon.jpeg" target="" />
