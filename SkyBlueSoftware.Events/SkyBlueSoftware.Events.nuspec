@@ -13,11 +13,6 @@
     <description>An event framework for .NET Core client applications.</description>
     <copyright>Copyright (c) 2019 Sky Blue Software</copyright>
     <repository url="https://github.com/robinsbs/events" />
-    <dependencies>
-      <group targetFramework=".NETStandard2.1" />
-      <group targetFramework=".NETStandard2.0" />
-      <group targetFramework=".NETFramework4.6.1" />
-    </dependencies>
   </metadata>
   <files>
     <file src="icon.jpeg" target="" />
