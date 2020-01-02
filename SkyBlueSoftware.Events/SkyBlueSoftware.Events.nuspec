@@ -2,7 +2,6 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>SkyBlueSoftware.Events</id>
-    <version>0.0.5</version><!-- NOTE: this version number can be overridden in the NuGet pack task of the Azure Pipeline definition -->
     <icon>icon.jpeg</icon>
     <authors>Sky Blue Software</authors>
     <owners>Sky Blue Software</owners>
@@ -11,7 +10,7 @@
     <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
     <projectUrl>https://github.com/robinsbs/events</projectUrl>
     <description>An event framework for .NET Core client applications.</description>
-    <copyright>Copyright (c) 2019 Sky Blue Software</copyright>
+    <copyright>Copyright (c) 2020 Sky Blue Software</copyright>
     <repository url="https://github.com/robinsbs/events" />
   </metadata>
   <files>
