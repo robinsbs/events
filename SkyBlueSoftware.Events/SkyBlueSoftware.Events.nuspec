@@ -15,6 +15,9 @@
     <repository url="https://github.com/robinsbs/events" />
     <dependencies>
       <group targetFramework=".NETCoreApp3.0" />
+      <dependency id="netstandard2.1" />
+      <dependency id="netstandard2.0" />
+      <dependency id="net461" />
     </dependencies>
   </metadata>
   <files>
