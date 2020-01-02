@@ -25,5 +25,10 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-  
+
+  <ItemGroup>
+    <None Include="LICENSE.txt" />
+    <None Include="icon.jpeg" />
+  </ItemGroup>
+
 </Project>
