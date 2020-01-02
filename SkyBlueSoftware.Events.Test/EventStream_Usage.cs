@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SkyBlueSoftware.Events;
 using SkyBlueSoftware.Events.Autofac;
-using static SkyBlueSoftware.Events.Autofac.SkyBlueSoftwareEvents;
 
 [TestClass]
 public class EventStream_Usage
@@ -10,7 +9,8 @@ public class EventStream_Usage
     [TestMethod]
     public void EventStream_Usage_Example()
     {
-        var (events, list, detail) = Initialize<IApp>(this).Resolve<IEventStream, ListViewModel, DetailViewModel>();
+        var (events, list, detail) = SkyBlueSoftwareEvents.Initialize<IApp>(this)
+                                                          .Resolve<IEventStream, ListViewModel, DetailViewModel>();
         events.Publish<SelectedEvent>();
         events.Publish<ChangedEvent>();
         Assert.IsTrue(detail.IsSelected);
@@ -19,7 +19,6 @@ public class EventStream_Usage
 }
 
 public interface IApp { }
-
 public class SelectedEvent : IApp { }
 public class ChangedEvent : IApp { }
 
