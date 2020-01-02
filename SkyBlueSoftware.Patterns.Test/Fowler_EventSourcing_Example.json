@@ -1,0 +1,25 @@
+{
+  "calculator": {
+    "Value": 4
+  },
+  "log": [
+    {
+      "Value": 2
+    },
+    {
+      "Value": 2
+    },
+    {
+      "Value": 3
+    },
+    {
+      "Value": 3
+    },
+    {
+      "Value": 1
+    },
+    {
+      "Value": 1
+    }
+  ]
+}
