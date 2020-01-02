@@ -19,7 +19,10 @@ namespace SkyBlueSoftware.Events
 
         public static IEnumerable<Type> SubscribedTo(this object o)
         {
-            var interfaces = o.GetType().GetInterfaces().Where(x => x.IsGenericType && typeof(ISubscribeTo).IsInstanceOfType(o));
+            var interfaces = o.GetType()
+                              .GetInterfaces()
+                              .Where(x => x.IsGenericType && x.GetInterfaces()
+                                                              .Any(y => y.IsAssignableFrom(typeof(ISubscribeTo))));
             foreach (var i in interfaces)
             {
                 foreach (var eventType in i.GetGenericArguments())
