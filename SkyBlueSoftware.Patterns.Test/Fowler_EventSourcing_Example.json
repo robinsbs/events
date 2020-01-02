@@ -4,12 +4,15 @@
   },
   "log": [
     {
+      "Name": "AddEvent",
       "Value": 2
     },
     {
+      "Name": "AddEvent",
       "Value": 3
     },
     {
+      "Name": "SubtractEvent",
       "Value": 1
     }
   ]

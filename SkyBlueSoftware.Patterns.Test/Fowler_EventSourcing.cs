@@ -33,24 +33,25 @@ namespace SkyBlueSoftware.Patterns.Test
         interface IApp { }
         interface IAppNew : IApp { }
         
-        class AddEvent : IAppNew
+        abstract class AppEvent : IAppNew
         {
-            public AddEvent(int value)
+            public AppEvent(int value)
             {
                 Value = value;
             }
 
+            public string Name => GetType().Name;
             public int Value { get; }
         }
 
-        class SubtractEvent : IAppNew
+        class AddEvent : AppEvent
         {
-            public SubtractEvent(int value)
-            {
-                Value = value;
-            }
+            public AddEvent(int value) : base(value) { }
+        }
 
-            public int Value { get; }
+        class SubtractEvent : AppEvent
+        {
+            public SubtractEvent(int value) : base(value) { }
         }
 
         class Calculator : IApp, ISubscribeTo<AddEvent>, ISubscribeTo<SubtractEvent>
