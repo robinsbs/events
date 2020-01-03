@@ -22,7 +22,7 @@ namespace SkyBlueSoftware.Patterns.Test
         [TestMethod]
         public void Fowler_EventSourcing_Example()
         {
-            var (events, calculator, log) = SkyBlueSoftwareEvents.Initialize(this, x => x.Is<IApp>(), x => x.Is<IAppNew>())
+            var (events, calculator, log) = SkyBlueSoftwareEvents.Initialize<IApp, IAppNew>(this)
                                                                  .Resolve<IEventStream, Calculator, EventLog>();
             events.Publish<AddEvent>(2);
             events.Publish<AddEvent>(3);
