@@ -13,8 +13,8 @@ namespace SkyBlueSoftware.Events.Autofac
         public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params Type[] allTypes) => RegisterAllTypes(b, allTypes.AsEnumerable(), null, null);
         public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, IEnumerable<Type> allTypes, Func<Type, bool> typeSelector, Func<Type, bool> newInstanceSelector)
         {
-            var selector = typeSelector ?? (x => x.Is<IRequireRegistration>());
-            var newSelector = newInstanceSelector ?? (x => x.Is<IRequireRegistrationNew>());
+            var selector = typeSelector ?? (x => x.Is(typeof(IRequireRegistration)));
+            var newSelector = newInstanceSelector ?? (x => x.Is(typeof(IRequireRegistrationNew)));
             var types = allTypes.Where(selector)
                                 .Union(new[] { typeof(EventStream), typeof(AutofacDependencyContainer) })
                                 .Select(x => new AutofacTypeRegistrationDefinition(x, newSelector(x)))
@@ -28,6 +28,7 @@ namespace SkyBlueSoftware.Events.Autofac
         public static bool IsAssignableTo<T>(this Type source) => IsAssignableTo(source, typeof(T));
         public static bool IsAssignableTo(this Type source, Type target) => target.GetTypeInfo().IsAssignableFrom(source.GetTypeInfo());
 
+        public static bool Is(this Type source, Type target) => source.IsAssignableTo(target);
         public static bool Is<T>(this Type t) => t.IsAssignableTo<T>();
         public static bool Is<T1, T2>(this Type t) => t.Is<T1>() || t.Is<T2>();
         public static bool Is<T1, T2, T3>(this Type t) => t.Is<T1, T2>() || t.Is<T3>();
