@@ -1,5 +1,4 @@
-﻿using Autofac;
-using System.Windows;
+﻿using System.Windows;
 using SkyBlueSoftware.Events.ViewModel;
 using SkyBlueSoftware.Events.Autofac;
 
@@ -9,13 +8,7 @@ namespace SkyBlueSoftware.Events.View
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            new MainWindow
-            {
-                DataContext = SkyBlueSoftwareEvents.RegisterAllTypes<Main>()
-                                                   .Build()
-                                                   .InitializeEvents()
-                                                   .Resolve<Main>()
-            }.Show();
+            new MainWindow { DataContext = SkyBlueSoftwareEvents.InitializeApp<Main>() }.Show();
         }
     }
 }
