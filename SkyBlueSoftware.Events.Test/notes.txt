@@ -1,5 +1,9 @@
 ﻿ToDo
 
+Create ViewModel tests
+Remove ViewModel dependency on Events.Autofac project
+Change IRegistration interfaces to be inputs to the container setup
+Default registration to "new" and make "singleton" the exception like autofac does
 change IEventStream to accept args as input to Publish method
 implement IRegister
 change Subscriber logic to use events to respond to the delay changes
