@@ -13,7 +13,8 @@ namespace SkyBlueSoftware.Events.Autofac
         public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, object instance, Func<Type, bool> typeSelector, Func<Type, bool> newInstanceSelector) => RegisterAllTypes(b, instance.GetType().Assembly.GetTypes(), typeSelector, newInstanceSelector);
         public static ContainerBuilder RegisterAllTypes<T>(this ContainerBuilder b, Func<Type, bool> typeSelector, Func<Type, bool> newInstanceSelector) => RegisterAllTypes(b, typeof(T).Assembly.GetTypes(), typeSelector, newInstanceSelector);
         public static ContainerBuilder RegisterAllTypes<T>(this ContainerBuilder b) => RegisterAllTypes(b, typeof(T).Assembly.GetTypes(), x => false, x => true);
-        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params Type[] allTypes) => RegisterAllTypes(b, allTypes.AsEnumerable(), x => x.Is(typeof(IRequireRegistration)), x => x.Is(typeof(IRequireRegistrationNew)));
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params Type[] allTypes) => RegisterAllTypes(b, allTypes.AsEnumerable(), x => false, x => true);
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, Func<Type, bool> typeSelector, Func<Type, bool> newInstanceSelector, params Type[] allTypes) => RegisterAllTypes(b, allTypes.AsEnumerable(), typeSelector, newInstanceSelector);
         public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, IEnumerable<Type> allTypes, Func<Type, bool> typeSelectorSingleton, Func<Type, bool> typeSelectorNewInstance)
         {
             var types = allTypes.Where(x => typeSelectorSingleton(x) || typeSelectorNewInstance(x))

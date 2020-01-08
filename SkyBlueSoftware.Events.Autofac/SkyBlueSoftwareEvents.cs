@@ -18,6 +18,7 @@ namespace SkyBlueSoftware.Events.Autofac
         public static ContainerBuilder RegisterAllTypes<T>(Func<Type, bool> typeSelector, Func<Type, bool> newInstanceSelector) => C().RegisterAllTypes<T>(typeSelector, newInstanceSelector);
         public static ContainerBuilder RegisterAllTypes<T>() => C().RegisterAllTypes<T>();
         public static ContainerBuilder RegisterAllTypes(params Type[] allTypes) => C().RegisterAllTypes(allTypes);
+        public static ContainerBuilder RegisterAllTypes(Func<Type, bool> typeSelector, Func<Type, bool> newInstanceSelector, params Type[] allTypes) => C().RegisterAllTypes(typeSelector, newInstanceSelector, allTypes);
         public static ContainerBuilder RegisterAllTypes(IEnumerable<Type> allTypes) => C().RegisterAllTypes(allTypes);
 
         private static ContainerBuilder C() => new ContainerBuilder();

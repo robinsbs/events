@@ -121,7 +121,7 @@ namespace SkyBlueSoftware.Events.Test
 
         public static IEventStream CE(params Type[] types)
         {
-            return SkyBlueSoftwareEvents.RegisterAllTypes(types)
+            return SkyBlueSoftwareEvents.RegisterAllTypes(x => x.Is<IRequireRegistration>(), x => x.Is<IRequireRegistrationNew>(), types)
                                         .Build()
                                         .InitializeEvents()
                                         .Resolve<IEventStream>();
