@@ -25,7 +25,7 @@ namespace SkyBlueSoftware.Events.ViewModel.Test
         [TestMethod]
         public void ViewModel_Tests_Test02()
         {
-            var (app, events) = SkyBlueSoftwareEvents.InitializeApp<Main, IEventStream>();
+            var (app, events) = SkyBlueSoftwareEvents.InitializeApp<Main, IRequireRegistration, IRequireRegistrationNew, IEventStream>();
 
             events.Publish<Event1>();
             events.Publish<Event1>();

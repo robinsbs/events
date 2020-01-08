@@ -7,8 +7,9 @@ namespace SkyBlueSoftware.Events.Autofac
     public static class SkyBlueSoftwareEvents
     {
         public static TApp InitializeApp<TApp>() => RegisterAllTypes<TApp>().Build().InitializeEvents().Resolve<TApp>();
-        public static (TApp, T) InitializeApp<TApp, T>() => RegisterAllTypes<TApp>().Build().InitializeEvents().Resolve<TApp, T>();
+        public static (TApp, TInstance) InitializeApp<TApp, TInstance>() => RegisterAllTypes<TApp>().Build().InitializeEvents().Resolve<TApp, TInstance>();
         public static TApp InitializeApp<TApp, TSingleton, TNew>() => RegisterAllTypes<TApp>(x => x.Is<TSingleton>(), x => x.Is<TNew>()).Build().InitializeEvents().Resolve<TApp>();
+        public static (TApp, TInstance) InitializeApp<TApp, TSingleton, TNew, TInstance>() => RegisterAllTypes<TApp>(x => x.Is<TSingleton>(), x => x.Is<TNew>()).Build().InitializeEvents().Resolve<TApp, TInstance>();
         public static IContainer Initialize<TSingleton, TNew>(object instance) => RegisterAllTypes(instance, x => x.Is<TSingleton>(), x => x.Is<TNew>()).Build().InitializeEvents();
         public static IContainer Initialize(object instance, Func<Type, bool> typeSelector = null, Func<Type, bool> newInstanceSelector = null) => RegisterAllTypes(instance, typeSelector, newInstanceSelector).Build().InitializeEvents();
         public static IContainer Initialize<T>(object instance) => RegisterAllTypes(instance, x => x.Is<T>()).Build().InitializeEvents();
