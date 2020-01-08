@@ -78,7 +78,7 @@ namespace SkyBlueSoftware.Events.Test
             var events = a.SubscribedTo().ToArray();
             Assert.AreEqual(1, events.Length);
             Assert.AreEqual(typeof(E), events[0]);
-            await Task.CompletedTask.Async();
+            await Task.CompletedTask;
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace SkyBlueSoftware.Events.Test
             Assert.AreEqual(2, events.Length);
             Assert.AreEqual(typeof(IE), events[0]);
             Assert.AreEqual(typeof(E2), events[1]);
-            await Task.CompletedTask.Async();
+            await Task.CompletedTask;
         }
 
         public class A : ISubscribeTo<E>, IRequireRegistration

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SkyBlueSoftware.Events
 {
@@ -14,8 +13,6 @@ namespace SkyBlueSoftware.Events
                 action(item);
             }
         }
-
-        public static async Task Async(this Task t) => await t.ConfigureAwait(false);
 
         public static IEnumerable<Type> SubscribedTo(this object o)
         {
