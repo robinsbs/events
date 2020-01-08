@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SkyBlueSoftware.Events
 {
-    public class DefaultDependencyContainer : IDependencyContainer
+    internal class DefaultDependencyContainer : IDependencyContainer
     {
         public Task<T> Create<T>(params object[] args)
         {

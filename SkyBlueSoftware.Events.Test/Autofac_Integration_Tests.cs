@@ -40,7 +40,7 @@ namespace SkyBlueSoftware.Events.Test
             var b = new ContainerBuilder();
             b.RegisterType<Widget>();
             var c = b.Build();
-            var f = new Factory(new AutofacDependencyContainer(c), new EventStream());
+            var f = new AutofacDependencyContainer(c);
             int i = 1;
             string s = "s";
             var d = new DateTime(2019, 12, 1, 3, 2, 1);

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SkyBlueSoftware.Events
 {
-    public abstract class Subscription : ISubscription
+    internal abstract class Subscription : ISubscription
     {
         protected Subscription(Type subscriberType, Type eventType)
         {
@@ -26,7 +26,7 @@ namespace SkyBlueSoftware.Events
         public abstract Task On(object o);
     }
 
-    public class Subscription<T> : Subscription
+    internal class Subscription<T> : Subscription
     {
         private readonly ISubscribeTo<T> subscriber;
 
