@@ -21,5 +21,37 @@ namespace SkyBlueSoftware.Events.ViewModel.Test
             var app = SkyBlueSoftwareEvents.InitializeApp<Main>();
             t.Verify(app);
         }
+
+        [TestMethod]
+        public void ViewModel_Tests_Test02()
+        {
+            var (app, events) = SkyBlueSoftwareEvents.InitializeApp<Main, IEventStream>();
+
+            events.Publish<Event1>();
+            events.Publish<Event1>();
+            events.Publish<Event1>();
+            events.Publish<Event1>();
+            events.Publish<Event1>();
+
+            events.Publish<Event2>();
+            events.Publish<Event2>();
+            events.Publish<Event2>();
+            events.Publish<Event2>();
+            events.Publish<Event2>();
+
+            events.Publish<Event3>();
+            events.Publish<Event3>();
+            events.Publish<Event3>();
+            events.Publish<Event3>();
+            events.Publish<Event3>();
+
+            events.Publish<Event4>();
+            events.Publish<Event4>();
+            events.Publish<Event4>();
+            events.Publish<Event4>();
+            events.Publish<Event4>();
+
+            t.Verify(app);
+        }
     }
 }

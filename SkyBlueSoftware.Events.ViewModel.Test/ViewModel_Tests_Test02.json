@@ -1,0 +1,104 @@
+{
+  "Title": "Events Application",
+  "Body": {
+    "Publishers": [
+      {
+        "Name": "Event1",
+        "PublishCommand": {},
+        "Label": "Publisher1 Event1"
+      },
+      {
+        "Name": "Event2",
+        "PublishCommand": {},
+        "Label": "Publisher2 Event2"
+      },
+      {
+        "Name": "Event3",
+        "PublishCommand": {},
+        "Label": "Publisher3 Event3"
+      },
+      {
+        "Name": "Event4",
+        "PublishCommand": {},
+        "Label": "Publisher4 Event4"
+      }
+    ],
+    "Subscribers": [
+      {
+        "Name": "SubscriberA",
+        "Delay": "0",
+        "Log": [
+          "5 - Received event Event1",
+          "4 - Received event Event1",
+          "3 - Received event Event1",
+          "2 - Received event Event1",
+          "1 - Received event Event1"
+        ]
+      },
+      {
+        "Name": "SubscriberB",
+        "Delay": "0",
+        "Log": [
+          "10 - Received event Event2",
+          "9 - Received event Event2",
+          "8 - Received event Event2",
+          "7 - Received event Event2",
+          "6 - Received event Event2",
+          "5 - Received event Event1",
+          "4 - Received event Event1",
+          "3 - Received event Event1",
+          "2 - Received event Event1",
+          "1 - Received event Event1"
+        ]
+      },
+      {
+        "Name": "SubscriberC",
+        "Delay": "0",
+        "Log": [
+          "15 - Received event Event4",
+          "14 - Received event Event4",
+          "13 - Received event Event4",
+          "12 - Received event Event4",
+          "11 - Received event Event4",
+          "10 - Received event Event3",
+          "9 - Received event Event3",
+          "8 - Received event Event3",
+          "7 - Received event Event3",
+          "6 - Received event Event3",
+          "5 - Received event Event2",
+          "4 - Received event Event2",
+          "3 - Received event Event2",
+          "2 - Received event Event2",
+          "1 - Received event Event2"
+        ]
+      },
+      {
+        "Name": "SubscriberD",
+        "Delay": "0",
+        "Log": [
+          "10 - Received event Event4",
+          "9 - Received event Event4",
+          "8 - Received event Event4",
+          "7 - Received event Event4",
+          "6 - Received event Event4",
+          "5 - Received event Event3",
+          "4 - Received event Event3",
+          "3 - Received event Event3",
+          "2 - Received event Event3",
+          "1 - Received event Event3"
+        ]
+      },
+      {
+        "Name": "SubscriberE",
+        "Delay": "0",
+        "Log": [
+          "5 - Received event Event4",
+          "4 - Received event Event4",
+          "3 - Received event Event4",
+          "2 - Received event Event4",
+          "1 - Received event Event4"
+        ]
+      }
+    ]
+  }
+}
