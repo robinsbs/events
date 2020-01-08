@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SkyBlueSoftware.Events.Autofac\SkyBlueSoftware.Events.Autofac.csproj" />
     <ProjectReference Include="..\SkyBlueSoftware.Events.ViewModel\SkyBlueSoftware.Events.ViewModel.csproj" />
+    <ProjectReference Include="..\SkyBlueSoftware.TestFramework\SkyBlueSoftware.TestFramework.csproj" />
   </ItemGroup>
 
 </Project>

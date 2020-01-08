@@ -1,0 +1,54 @@
+{
+  "Title": "Events Application",
+  "Body": {
+    "Publishers": [
+      {
+        "Name": "Event1",
+        "PublishCommand": {},
+        "Label": "Publisher1 Event1"
+      },
+      {
+        "Name": "Event2",
+        "PublishCommand": {},
+        "Label": "Publisher2 Event2"
+      },
+      {
+        "Name": "Event3",
+        "PublishCommand": {},
+        "Label": "Publisher3 Event3"
+      },
+      {
+        "Name": "Event4",
+        "PublishCommand": {},
+        "Label": "Publisher4 Event4"
+      }
+    ],
+    "Subscribers": [
+      {
+        "Name": "SubscriberA",
+        "Delay": "0",
+        "Log": []
+      },
+      {
+        "Name": "SubscriberB",
+        "Delay": "0",
+        "Log": []
+      },
+      {
+        "Name": "SubscriberC",
+        "Delay": "0",
+        "Log": []
+      },
+      {
+        "Name": "SubscriberD",
+        "Delay": "0",
+        "Log": []
+      },
+      {
+        "Name": "SubscriberE",
+        "Delay": "0",
+        "Log": []
+      }
+    ]
+  }
+}
