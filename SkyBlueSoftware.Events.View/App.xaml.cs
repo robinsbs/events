@@ -8,7 +8,7 @@ namespace SkyBlueSoftware.Events.View
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            new MainWindow { DataContext = SkyBlueSoftwareEvents.InitializeApp<Main>() }.Show();
+            new MainWindow { DataContext = SkyBlueSoftwareEvents.InitializeApp<Main, IRequireRegistration, IRequireRegistrationNew>() }.Show();
         }
     }
 }
