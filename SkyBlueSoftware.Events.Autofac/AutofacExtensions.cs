@@ -8,16 +8,16 @@ namespace SkyBlueSoftware.Events.Autofac
 {
     public static class AutofacExtensions
     {
-        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, object instance, Func<Type, bool> typeSelector = null, Func<Type, bool> newInstanceSelector = null) => RegisterAllTypes(b, instance.GetType().Assembly.GetTypes(), typeSelector, newInstanceSelector);
-        public static ContainerBuilder RegisterAllTypes<T>(this ContainerBuilder b) => RegisterAllTypes(b, typeof(T).Assembly.GetTypes(), null, null);
-        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params Type[] allTypes) => RegisterAllTypes(b, allTypes.AsEnumerable(), null, null);
-        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, IEnumerable<Type> allTypes, Func<Type, bool> typeSelector, Func<Type, bool> newInstanceSelector)
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, object instance) => RegisterAllTypes(b, instance.GetType().Assembly.GetTypes(), x => false, x => true);
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, object instance, Func<Type, bool> typeSelector) => RegisterAllTypes(b, instance.GetType().Assembly.GetTypes(), typeSelector, x => false);
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, object instance, Func<Type, bool> typeSelector, Func<Type, bool> newInstanceSelector) => RegisterAllTypes(b, instance.GetType().Assembly.GetTypes(), typeSelector, newInstanceSelector);
+        public static ContainerBuilder RegisterAllTypes<T>(this ContainerBuilder b) => RegisterAllTypes(b, typeof(T).Assembly.GetTypes(), x => x.Is(typeof(IRequireRegistration)), x => x.Is(typeof(IRequireRegistrationNew)));
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, params Type[] allTypes) => RegisterAllTypes(b, allTypes.AsEnumerable(), x => x.Is(typeof(IRequireRegistration)), x => x.Is(typeof(IRequireRegistrationNew)));
+        public static ContainerBuilder RegisterAllTypes(this ContainerBuilder b, IEnumerable<Type> allTypes, Func<Type, bool> typeSelectorSingleton, Func<Type, bool> typeSelectorNewInstance)
         {
-            var selector = typeSelector ?? (x => x.Is(typeof(IRequireRegistration)));
-            var newSelector = newInstanceSelector ?? (x => x.Is(typeof(IRequireRegistrationNew)));
-            var types = allTypes.Where(selector)
+            var types = allTypes.Where(x => typeSelectorSingleton(x) || typeSelectorNewInstance(x))
                                 .Union(new[] { typeof(EventStream), typeof(AutofacDependencyContainer) })
-                                .Select(x => new AutofacTypeRegistrationDefinition(x, newSelector(x)))
+                                .Select(x => new AutofacTypeRegistrationDefinition(x, typeSelectorNewInstance(x)))
                                 .ToArray();
             b.RegisterTypes(types.AsNew()).AsImplementedInterfaces().AsSelf();
             b.RegisterTypes(types.AsSingleInstance()).AsImplementedInterfaces().AsSelf().SingleInstance();
