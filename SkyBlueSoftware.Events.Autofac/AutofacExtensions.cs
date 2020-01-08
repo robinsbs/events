@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace SkyBlueSoftware.Events.Autofac
 {
@@ -24,7 +25,10 @@ namespace SkyBlueSoftware.Events.Autofac
             return b;
         }
 
-        public static bool Is<T>(this Type type) => type.IsAssignableTo<T>();
+        public static bool IsAssignableTo<T>(this Type source) => IsAssignableTo(source, typeof(T));
+        public static bool IsAssignableTo(this Type source, Type target) => target.GetTypeInfo().IsAssignableFrom(source.GetTypeInfo());
+
+        public static bool Is<T>(this Type t) => t.IsAssignableTo<T>();
         public static bool Is<T1, T2>(this Type t) => t.Is<T1>() || t.Is<T2>();
         public static bool Is<T1, T2, T3>(this Type t) => t.Is<T1, T2>() || t.Is<T3>();
         public static bool Is<T1, T2, T3, T4>(this Type t) => t.Is<T1, T2, T3>() || t.Is<T4>();
