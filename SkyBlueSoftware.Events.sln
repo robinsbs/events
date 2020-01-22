@@ -26,7 +26,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.Auto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Patterns.Test", "SkyBlueSoftware.Patterns.Test\SkyBlueSoftware.Patterns.Test.csproj", "{B5D73F48-DF1F-43C0-9CAE-9F48B3434F79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Events.ViewModel.Test", "SkyBlueSoftware.Events.ViewModel.Test\SkyBlueSoftware.Events.ViewModel.Test.csproj", "{0D580226-1F38-4708-B086-92E0C965D0C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.ViewModel.Test", "SkyBlueSoftware.Events.ViewModel.Test\SkyBlueSoftware.Events.ViewModel.Test.csproj", "{0D580226-1F38-4708-B086-92E0C965D0C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Storage.Test", "SkyBlueSoftware.Storage.Test\SkyBlueSoftware.Storage.Test.csproj", "{552BD59F-2DD7-4F4E-AA77-0F77A14BE94E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +72,10 @@ Global
 		{0D580226-1F38-4708-B086-92E0C965D0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D580226-1F38-4708-B086-92E0C965D0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D580226-1F38-4708-B086-92E0C965D0C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{552BD59F-2DD7-4F4E-AA77-0F77A14BE94E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{552BD59F-2DD7-4F4E-AA77-0F77A14BE94E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{552BD59F-2DD7-4F4E-AA77-0F77A14BE94E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{552BD59F-2DD7-4F4E-AA77-0F77A14BE94E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{09E86984-D006-46CB-8770-F562604B4C02} = {73EA29C2-500F-4EAD-A0D1-265D63866615}
 		{B5D73F48-DF1F-43C0-9CAE-9F48B3434F79} = {73EA29C2-500F-4EAD-A0D1-265D63866615}
 		{0D580226-1F38-4708-B086-92E0C965D0C4} = {73EA29C2-500F-4EAD-A0D1-265D63866615}
+		{552BD59F-2DD7-4F4E-AA77-0F77A14BE94E} = {73EA29C2-500F-4EAD-A0D1-265D63866615}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7527884-EE44-40A9-B201-B57CD41DF9A2}
