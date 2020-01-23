@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,12 +13,12 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var source = new CancellationTokenSource();
             var token = source.Token;
-            using (var connection = new SqlConnection("Server=(local);Integrated Security=true;"))
+            using (var connection = new SqliteConnection(@"Data Source=..\..\..\sqlite.db"))
             {
                 await connection.OpenAsync(token);
                 using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = "select * from sbs.dbo.document";
+                    command.CommandText = "select * from document";
                     var reader = await command.ExecuteReaderAsync(token);
                     while (await reader.ReadAsync(token))
                     {
