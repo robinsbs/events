@@ -24,17 +24,19 @@ namespace SkyBlueSoftware.Storage.Test
             }
         }
 
-        //[TestMethod]
-        //public async Task Storage_Tests_SqlServer()
-        //{
-        //    await foreach(var r in ReadAsync(() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true")))
-        //    {
-        //        var id = await r.GetValueAsync<int>(0);
-        //        var date = await r.GetValueAsync<DateTime>(1);
-        //        var text = await r.GetValueAsync<string>(2);
-        //        Console.WriteLine($"{id};{date};{text}");
-        //    }
-        //}
+#if !IsBuildServer
+        [TestMethod]
+        public async Task Storage_Tests_SqlServer()
+        {
+            await foreach (var r in ReadAsync(() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true")))
+            {
+                var id = await r.GetValueAsync<int>(0);
+                var date = await r.GetValueAsync<DateTime>(1);
+                var text = await r.GetValueAsync<string>(2);
+                Console.WriteLine($"{id};{date};{text}");
+            }
+        }
+#endif
 
         private async IAsyncEnumerable<IRecord> ReadAsync(Func<DbConnection> connectionFactory)
         {
