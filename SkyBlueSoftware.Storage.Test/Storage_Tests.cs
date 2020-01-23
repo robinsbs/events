@@ -17,9 +17,9 @@ namespace SkyBlueSoftware.Storage.Test
         {
             await foreach(var r in ReadAsync(() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db")))
             {
-                var id = await r.GetValueAsync<int>(0);
-                var date = await r.GetValueAsync<DateTime>(1);
-                var text = await r.GetValueAsync<string>(2);
+                var id = await r.GetValueAsync<int>("Id");
+                var date = await r.GetValueAsync<DateTime>("Date");
+                var text = await r.GetValueAsync<string>("Text");
                 Console.WriteLine($"{id};{date};{text}");
             }
         }
@@ -30,9 +30,9 @@ namespace SkyBlueSoftware.Storage.Test
         {
             await foreach (var r in ReadAsync(() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true")))
             {
-                var id = await r.GetValueAsync<int>(0);
-                var date = await r.GetValueAsync<DateTime>(1);
-                var text = await r.GetValueAsync<string>(2);
+                var id = await r.GetValueAsync<int>("Id");
+                var date = await r.GetValueAsync<DateTime>("Date");
+                var text = await r.GetValueAsync<string>("Text");
                 Console.WriteLine($"{id};{date};{text}");
             }
         }
@@ -49,32 +49,52 @@ namespace SkyBlueSoftware.Storage.Test
                 {
                     command.CommandText = "select * from document";
                     var reader = await command.ExecuteReaderAsync(token);
+                    var columns = CreateColumns(reader);
                     while (await reader.ReadAsync(token))
                     {
-                        yield return new Record(reader);
+                        yield return new Record(reader, columns);
                     }
                 }
             }
         }
 
+        private IDictionary<string, int> CreateColumns(DbDataReader reader)
+        {
+            var fieldCount = reader.FieldCount;
+            var columns = new Dictionary<string, int>(fieldCount, StringComparer.OrdinalIgnoreCase);
+            for (int i = 0; i < fieldCount; i++)
+            {
+                columns[reader.GetName(i)] = i;
+            }
+            return columns;
+        }
+
         public class Record : IRecord
         {
             private readonly DbDataReader reader;
+            private readonly IDictionary<string, int> columns;
 
-            public Record(DbDataReader reader)
+            public Record(DbDataReader reader, IDictionary<string, int> columns)
             {
                 this.reader = reader;
+                this.columns = columns;
             }
 
             public async Task<T> GetValueAsync<T>(int ordinal)
             {
                 return await reader.GetFieldValueAsync<T>(ordinal);
             }
+
+            public async Task<T> GetValueAsync<T>(string name)
+            {
+                return await reader.GetFieldValueAsync<T>(columns[name]);
+            }
         }
 
         public interface IRecord
         {
             public Task<T> GetValueAsync<T>(int ordinal);
+            public Task<T> GetValueAsync<T>(string name);
         }
     }
 }
