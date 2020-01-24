@@ -60,7 +60,7 @@ namespace SkyBlueSoftware.Storage.Test
                     var columns = CreateColumns(reader);
                     while (await reader.ReadAsync(token))
                     {
-                        yield return new Record(reader, columns);
+                        yield return new Record(reader, columns, token);
                     }
                 }
             }
@@ -81,17 +81,19 @@ namespace SkyBlueSoftware.Storage.Test
         {
             private readonly DbDataReader reader;
             private readonly IDictionary<string, int> columns;
+            private readonly CancellationToken token;
 
-            public Record(DbDataReader reader, IDictionary<string, int> columns)
+            public Record(DbDataReader reader, IDictionary<string, int> columns, CancellationToken token)
             {
                 this.reader = reader;
                 this.columns = columns;
+                this.token = token;
             }
 
             public T GetValue<T>(int ordinal) => reader.GetFieldValue<T>(ordinal);
             public T GetValue<T>(string name) => GetValue<T>(columns[name]);
-            public async Task<T> GetValueAsync<T>(int ordinal) => await reader.GetFieldValueAsync<T>(ordinal);
-            public async Task<T> GetValueAsync<T>(string name) => await reader.GetFieldValueAsync<T>(columns[name]);
+            public Task<T> GetValueAsync<T>(int ordinal) => reader.GetFieldValueAsync<T>(ordinal, token);
+            public Task<T> GetValueAsync<T>(string name) => GetValueAsync<T>(columns[name]);
         }
 
         public interface IRecord
