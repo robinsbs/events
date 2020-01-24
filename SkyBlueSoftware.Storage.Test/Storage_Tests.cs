@@ -12,6 +12,14 @@ namespace SkyBlueSoftware.Storage.Test
     [TestClass]
     public class Storage_Tests
     {
+        /// <summary>
+        /// TODO:
+        /// 1. cancellation
+        /// 2. stored procedures
+        /// 3. multiple results
+        /// 4. json results
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task Storage_Tests_Sqlite()
         {
@@ -80,19 +88,21 @@ namespace SkyBlueSoftware.Storage.Test
                 this.columns = columns;
             }
 
-            public async Task<T> GetValueAsync<T>(int ordinal)
-            {
-                return await reader.GetFieldValueAsync<T>(ordinal);
-            }
-
-            public async Task<T> GetValueAsync<T>(string name)
-            {
-                return await reader.GetFieldValueAsync<T>(columns[name]);
-            }
+            public T GetValue<T>(int ordinal) => reader.GetFieldValue<T>(ordinal);
+            public T GetValue<T>(string name) => GetValue<T>(columns[name]);
+            public async Task<T> GetValueAsync<T>(int ordinal) => await reader.GetFieldValueAsync<T>(ordinal);
+            public async Task<T> GetValueAsync<T>(string name) => await reader.GetFieldValueAsync<T>(columns[name]);
         }
 
         public interface IRecord
         {
+            // column name
+            // column ordinal
+            // columns
+            // get values
+            // isdbnull
+            public T GetValue<T>(int ordinal);
+            public T GetValue<T>(string name);
             public Task<T> GetValueAsync<T>(int ordinal);
             public Task<T> GetValueAsync<T>(string name);
         }
