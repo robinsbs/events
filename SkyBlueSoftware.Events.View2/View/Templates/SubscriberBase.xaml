@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:SkyBlueSoftware.Events.ViewModel;assembly=SkyBlueSoftware.Events.ViewModel2">
+
+    <DataTemplate DataType="{x:Type vm:SubscriberBase}">
+        <Border BorderBrush="DarkGray" BorderThickness="1">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="Delay" Margin="10 0 5 0" />
+                    <TextBox Text="{Binding Delay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="50" MaxLength="6" />
+                </StackPanel>
+                <ScrollViewer Height="100">
+                    <ItemsControl ItemsSource="{Binding Log}" />
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+
+</ResourceDictionary>

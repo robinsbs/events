@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SkyBlueSoftware.Events.Autofac\SkyBlueSoftware.Events.Autofac.csproj" />
+    <ProjectReference Include="..\SkyBlueSoftware.Events.ViewModel2\SkyBlueSoftware.Events.ViewModel2.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\Templates\Body.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Templates\Main.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Templates\PublisherBase.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Templates\SubscriberBase.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Templates\_App.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
