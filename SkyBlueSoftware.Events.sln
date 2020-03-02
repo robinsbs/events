@@ -18,10 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Events.View", "SkyBlueSoftware.Events.View\SkyBlueSoftware.Events.View.csproj", "{1039F53C-6E73-40B7-B3DD-D015143B38C1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Events.ViewModel", "SkyBlueSoftware.Events.ViewModel\SkyBlueSoftware.Events.ViewModel.csproj", "{6568E449-1A7D-4B90-A44E-96BCEC6252FD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.Autofac", "SkyBlueSoftware.Events.Autofac\SkyBlueSoftware.Events.Autofac.csproj", "{7FEA7C71-1F14-4227-86E3-42CF16F47A21}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Patterns.Test", "SkyBlueSoftware.Patterns.Test\SkyBlueSoftware.Patterns.Test.csproj", "{B5D73F48-DF1F-43C0-9CAE-9F48B3434F79}"
@@ -30,9 +26,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.View
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Storage.Test", "SkyBlueSoftware.Storage.Test\SkyBlueSoftware.Storage.Test.csproj", "{552BD59F-2DD7-4F4E-AA77-0F77A14BE94E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Events.View2", "SkyBlueSoftware.Events.View2\SkyBlueSoftware.Events.View2.csproj", "{A4D88D92-297B-45CE-A130-4A562676E799}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.ViewModel", "SkyBlueSoftware.Events.ViewModel\SkyBlueSoftware.Events.ViewModel.csproj", "{977EECC1-1D67-4BCA-9E71-E3ADA3EFCF17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Events.ViewModel2", "SkyBlueSoftware.Events.ViewModel2\SkyBlueSoftware.Events.ViewModel2.csproj", "{F375C026-F518-4FBD-BD87-8D83D181CC05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.View", "SkyBlueSoftware.Events.View\SkyBlueSoftware.Events.View.csproj", "{24B219B7-0CA5-4677-A885-D613B3DE6005}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,14 +52,6 @@ Global
 		{09E86984-D006-46CB-8770-F562604B4C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09E86984-D006-46CB-8770-F562604B4C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09E86984-D006-46CB-8770-F562604B4C02}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1039F53C-6E73-40B7-B3DD-D015143B38C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1039F53C-6E73-40B7-B3DD-D015143B38C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1039F53C-6E73-40B7-B3DD-D015143B38C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1039F53C-6E73-40B7-B3DD-D015143B38C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6568E449-1A7D-4B90-A44E-96BCEC6252FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6568E449-1A7D-4B90-A44E-96BCEC6252FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6568E449-1A7D-4B90-A44E-96BCEC6252FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6568E449-1A7D-4B90-A44E-96BCEC6252FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7FEA7C71-1F14-4227-86E3-42CF16F47A21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FEA7C71-1F14-4227-86E3-42CF16F47A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FEA7C71-1F14-4227-86E3-42CF16F47A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -80,14 +68,14 @@ Global
 		{552BD59F-2DD7-4F4E-AA77-0F77A14BE94E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{552BD59F-2DD7-4F4E-AA77-0F77A14BE94E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{552BD59F-2DD7-4F4E-AA77-0F77A14BE94E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4D88D92-297B-45CE-A130-4A562676E799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4D88D92-297B-45CE-A130-4A562676E799}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4D88D92-297B-45CE-A130-4A562676E799}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4D88D92-297B-45CE-A130-4A562676E799}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F375C026-F518-4FBD-BD87-8D83D181CC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F375C026-F518-4FBD-BD87-8D83D181CC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F375C026-F518-4FBD-BD87-8D83D181CC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F375C026-F518-4FBD-BD87-8D83D181CC05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{977EECC1-1D67-4BCA-9E71-E3ADA3EFCF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{977EECC1-1D67-4BCA-9E71-E3ADA3EFCF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{977EECC1-1D67-4BCA-9E71-E3ADA3EFCF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{977EECC1-1D67-4BCA-9E71-E3ADA3EFCF17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24B219B7-0CA5-4677-A885-D613B3DE6005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24B219B7-0CA5-4677-A885-D613B3DE6005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24B219B7-0CA5-4677-A885-D613B3DE6005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24B219B7-0CA5-4677-A885-D613B3DE6005}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

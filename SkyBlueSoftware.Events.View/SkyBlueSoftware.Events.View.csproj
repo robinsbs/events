@@ -1,125 +1,38 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1039F53C-6E73-40B7-B3DD-D015143B38C1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SkyBlueSoftware.Events.View</RootNamespace>
-    <AssemblyName>SkyBlueSoftware.Events.View</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <ProjectReference Include="..\SkyBlueSoftware.Events.Autofac\SkyBlueSoftware.Events.Autofac.csproj" />
+    <ProjectReference Include="..\SkyBlueSoftware.Events.ViewModel\SkyBlueSoftware.Events.ViewModel.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="View\Windows\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="View\Templates\Body.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Update="View\Templates\Body.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Templates\Main.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Update="View\Templates\Main.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Templates\PublisherBase.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Update="View\Templates\PublisherBase.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Templates\SubscriberBase.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Update="View\Templates\SubscriberBase.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Templates\_App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Windows\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Update="View\Templates\_App.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SkyBlueSoftware.Events.Autofac\SkyBlueSoftware.Events.Autofac.csproj">
-      <Project>{7fea7c71-1f14-4227-86e3-42cf16f47a21}</Project>
-      <Name>SkyBlueSoftware.Events.Autofac</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SkyBlueSoftware.Events.ViewModel\SkyBlueSoftware.Events.ViewModel.csproj">
-      <Project>{6568e449-1a7d-4b90-a44e-96bcec6252fd}</Project>
-      <Name>SkyBlueSoftware.Events.ViewModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SkyBlueSoftware.Events\SkyBlueSoftware.Events.csproj">
-      <Project>{9bba3b0a-c428-4fe0-a5cf-9a650e886a81}</Project>
-      <Name>SkyBlueSoftware.Events</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
