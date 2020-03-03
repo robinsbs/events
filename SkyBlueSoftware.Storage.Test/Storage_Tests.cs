@@ -50,19 +50,15 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var source = new CancellationTokenSource();
             var token = source.Token;
-            using (var connection = connectionFactory())
+            await using var connection = connectionFactory();
+            await connection.OpenAsync(token);
+            await using var command = connection.CreateCommand();
+            command.CommandText = "select * from document";
+            var reader = await command.ExecuteReaderAsync(token);
+            var columns = CreateColumns(reader);
+            while (await reader.ReadAsync(token))
             {
-                await connection.OpenAsync(token);
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = "select * from document";
-                    var reader = await command.ExecuteReaderAsync(token);
-                    var columns = CreateColumns(reader);
-                    while (await reader.ReadAsync(token))
-                    {
-                        yield return new Record(reader, columns, token);
-                    }
-                }
+                yield return new Record(reader, columns, token);
             }
         }
 
