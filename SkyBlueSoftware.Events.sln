@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.TestFramework", "SkyBlueSoftware.TestFramework\SkyBlueSoftware.TestFramework.csproj", "{09E86984-D006-46CB-8770-F562604B4C02}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F0FDE8F9-BA2D-40D6-909D-378550CA0347}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.Autofac", "SkyBlueSoftware.Events.Autofac\SkyBlueSoftware.Events.Autofac.csproj", "{7FEA7C71-1F14-4227-86E3-42CF16F47A21}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Patterns.Test", "SkyBlueSoftware.Patterns.Test\SkyBlueSoftware.Patterns.Test.csproj", "{B5D73F48-DF1F-43C0-9CAE-9F48B3434F79}"
@@ -28,6 +26,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.View", "SkyBlueSoftware.Events.View\SkyBlueSoftware.Events.View.csproj", "{24B219B7-0CA5-4677-A885-D613B3DE6005}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Framework.Test", "SkyBlueSoftware.Framework.Test\SkyBlueSoftware.Framework.Test.csproj", "{B7CC8193-4AB7-4D75-8FFF-FEC102A401AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Framework", "SkyBlueSoftware.Framework\SkyBlueSoftware.Framework.csproj", "{5D00ECAF-FA75-4E86-8964-489A9F1D538F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +79,10 @@ Global
 		{B7CC8193-4AB7-4D75-8FFF-FEC102A401AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7CC8193-4AB7-4D75-8FFF-FEC102A401AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7CC8193-4AB7-4D75-8FFF-FEC102A401AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D00ECAF-FA75-4E86-8964-489A9F1D538F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D00ECAF-FA75-4E86-8964-489A9F1D538F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D00ECAF-FA75-4E86-8964-489A9F1D538F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D00ECAF-FA75-4E86-8964-489A9F1D538F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
