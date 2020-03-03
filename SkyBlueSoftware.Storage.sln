@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Storage.Test", "SkyBlueSoftware.Storage.Test\SkyBlueSoftware.Storage.Test.csproj", "{4ACF3162-CE76-48D9-B0C0-C47CD71FFCF2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.TestFramework", "SkyBlueSoftware.TestFramework\SkyBlueSoftware.TestFramework.csproj", "{1CEA957E-3A3F-46CA-9174-851A42EF7A02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4ACF3162-CE76-48D9-B0C0-C47CD71FFCF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ACF3162-CE76-48D9-B0C0-C47CD71FFCF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ACF3162-CE76-48D9-B0C0-C47CD71FFCF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ACF3162-CE76-48D9-B0C0-C47CD71FFCF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CEA957E-3A3F-46CA-9174-851A42EF7A02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CEA957E-3A3F-46CA-9174-851A42EF7A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CEA957E-3A3F-46CA-9174-851A42EF7A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CEA957E-3A3F-46CA-9174-851A42EF7A02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CE9A9025-E029-43EF-A88C-3ACDF14C5BF2}
+	EndGlobalSection
+EndGlobal

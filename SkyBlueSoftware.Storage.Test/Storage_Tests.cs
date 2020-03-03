@@ -6,12 +6,21 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
+using SkyBlueSoftware.TestFramework;
 
 namespace SkyBlueSoftware.Storage.Test
 {
     [TestClass]
     public class Storage_Tests
     {
+        private TestHarness t = new TestHarness();
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            t = new TestHarness();
+        }
+
         /// <summary>
         /// TODO:
         /// 1. cancellation
@@ -23,13 +32,17 @@ namespace SkyBlueSoftware.Storage.Test
         [TestMethod]
         public async Task Storage_Tests_Sqlite()
         {
+            var results = new List<string>();
+
             await foreach(var r in ReadAsync(() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db")))
             {
                 var id = await r.GetValueAsync<int>("Id");
                 var date = await r.GetValueAsync<DateTime>("Date");
                 var text = await r.GetValueAsync<string>("Text");
-                Console.WriteLine($"{id};{date};{text}");
+                results.Add($"{id};{date};{text}");
             }
+
+            t.Verify(results);
         }
 
 #if !IsBuildServer
