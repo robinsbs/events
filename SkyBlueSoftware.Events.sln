@@ -14,9 +14,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.TestFramework", "SkyBlueSoftware.TestFramework\SkyBlueSoftware.TestFramework.csproj", "{09E86984-D006-46CB-8770-F562604B4C02}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F0FDE8F9-BA2D-40D6-909D-378550CA0347}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.Autofac", "SkyBlueSoftware.Events.Autofac\SkyBlueSoftware.Events.Autofac.csproj", "{7FEA7C71-1F14-4227-86E3-42CF16F47A21}"
 EndProject
@@ -30,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.View
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.View", "SkyBlueSoftware.Events.View\SkyBlueSoftware.Events.View.csproj", "{24B219B7-0CA5-4677-A885-D613B3DE6005}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Framework.Test", "SkyBlueSoftware.Framework.Test\SkyBlueSoftware.Framework.Test.csproj", "{B7CC8193-4AB7-4D75-8FFF-FEC102A401AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Framework.Test", "SkyBlueSoftware.Framework.Test\SkyBlueSoftware.Framework.Test.csproj", "{B7CC8193-4AB7-4D75-8FFF-FEC102A401AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
