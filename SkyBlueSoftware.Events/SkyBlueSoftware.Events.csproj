@@ -9,8 +9,8 @@
     <IsPrerelease>true</IsPrerelease>
     <VersionNumber>0.0.6</VersionNumber>
     <Version Condition="'$(IsPrerelease)' == 'false'">$(VersionNumber)</Version>
-    <VersionPrefix Condition="'$(IsPrerelease)' == 'true' ">$(VersionNumber).$(Build_BuildId)</VersionPrefix>
-    <VersionSuffix Condition="'$(IsPrerelease)' == 'true' ">CI-$(Build_BuildId)</VersionSuffix>
+    <VersionPrefix Condition="'$(IsPrerelease)' == 'true' and '$(Build_BuildId)' != '' ">$(VersionNumber).$(Build_BuildId)</VersionPrefix>
+    <VersionSuffix Condition="'$(IsPrerelease)' == 'true' and '$(Build_BuildId)' != '' ">CI-$(Build_BuildId)</VersionSuffix>
     <AssemblyVersion>$(VersionNumber)</AssemblyVersion>
     <Authors>Sky Blue Software</Authors>
     <Company>Sky Blue Software</Company>
