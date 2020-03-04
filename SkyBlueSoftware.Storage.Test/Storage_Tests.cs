@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using SkyBlueSoftware.TestFramework;
@@ -43,7 +42,12 @@ namespace SkyBlueSoftware.Storage.Test
                 results.Add($"{id};{date};{text}");
             }
 
-            t.Verify(results.OrderBy(x => x));
+            t.Verify(results);
+
+            foreach (var line in System.IO.File.ReadAllLines(@"..\..\..\Storage_Tests_Sqlite.json"))
+            {
+                Console.WriteLine(line);
+            }
         }
 
 #if !IsBuildServer
