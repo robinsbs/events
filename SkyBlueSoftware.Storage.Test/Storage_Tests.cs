@@ -31,7 +31,23 @@ namespace SkyBlueSoftware.Storage.Test
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async Task Storage_Tests_Sqlite()
+        public void Storage_Tests_Sqlite()
+        {
+            var results = new List<string>();
+
+            foreach(var r in Read(() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db")))
+            {
+                var id = r.GetValue<int>("Id");
+                var date = r.GetValue<DateTime>("Date");
+                var text = r.GetValue<string>("Text");
+                results.Add($"{id};{date.MDYHH()};{text}");
+            }
+
+            t.Verify(results);
+        }
+
+        [TestMethod]
+        public async Task Storage_Tests_Sqlite_Async()
         {
             var results = new List<string>();
 
@@ -59,6 +75,20 @@ namespace SkyBlueSoftware.Storage.Test
             }
         }
 #endif
+
+        private IEnumerable<IRecord> Read(Func<DbConnection> connectionFactory)
+        {
+            using var connection = connectionFactory();
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText = "select * from document";
+            var reader = command.ExecuteReader();
+            var columns = CreateColumns(reader);
+            while (reader.Read())
+            {
+                yield return new Record(reader, columns, CancellationToken.None);
+            }
+        }
 
         private async IAsyncEnumerable<IRecord> ReadAsync(Func<DbConnection> connectionFactory)
         {
