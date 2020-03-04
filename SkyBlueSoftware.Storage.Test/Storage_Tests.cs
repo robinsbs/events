@@ -35,7 +35,7 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            foreach(var r in Read(() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db")))
+            foreach(var r in Read(() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db"), "select * from document"))
             {
                 var id = r.GetValue<int>("Id");
                 var date = r.GetValue<DateTime>("Date");
@@ -51,7 +51,7 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            await foreach(var r in ReadAsync(() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db")))
+            await foreach(var r in ReadAsync(() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db"), "select * from document"))
             {
                 var id = await r.GetValueAsync<int>("Id");
                 var date = await r.GetValueAsync<DateTime>("Date");
@@ -66,23 +66,27 @@ namespace SkyBlueSoftware.Storage.Test
         [TestMethod]
         public async Task Storage_Tests_SqlServer()
         {
-            await foreach (var r in ReadAsync(() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true")))
+            var results = new List<string>();
+
+            await foreach (var r in ReadAsync(() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true"), "select * from document"))
             {
                 var id = await r.GetValueAsync<int>("Id");
                 var date = await r.GetValueAsync<DateTime>("Date");
                 var text = await r.GetValueAsync<string>("Text");
-                Console.WriteLine($"{id};{date};{text}");
+                results.Add($"{id};{date.MDYHH()};{text}");
             }
+
+            t.Verify(results, nameof(Storage_Tests_SqlServer));
         }
 #endif
 
-        private IEnumerable<IRecord> Read(Func<DbConnection> connectionFactory)
+        private IEnumerable<IRecord> Read(Func<DbConnection> connectionFactory, string command)
         {
             using var connection = connectionFactory();
             connection.Open();
-            using var command = connection.CreateCommand();
-            command.CommandText = "select * from document";
-            var reader = command.ExecuteReader();
+            using var dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = command;
+            var reader = dbCommand.ExecuteReader();
             var columns = CreateColumns(reader);
             while (reader.Read())
             {
@@ -90,15 +94,15 @@ namespace SkyBlueSoftware.Storage.Test
             }
         }
 
-        private async IAsyncEnumerable<IRecord> ReadAsync(Func<DbConnection> connectionFactory)
+        private async IAsyncEnumerable<IRecord> ReadAsync(Func<DbConnection> connectionFactory, string command)
         {
             var source = new CancellationTokenSource();
             var token = source.Token;
             await using var connection = connectionFactory();
             await connection.OpenAsync(token);
-            await using var command = connection.CreateCommand();
-            command.CommandText = "select * from document";
-            var reader = await command.ExecuteReaderAsync(token);
+            await using var dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = command;
+            var reader = await dbCommand.ExecuteReaderAsync(token);
             var columns = CreateColumns(reader);
             while (await reader.ReadAsync(token))
             {
@@ -110,7 +114,7 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var fieldCount = reader.FieldCount;
             var columns = new Dictionary<string, int>(fieldCount, StringComparer.OrdinalIgnoreCase);
-            for (int i = 0; i < fieldCount; i++)
+            for (var i = 0; i < fieldCount; i++)
             {
                 columns[reader.GetName(i)] = i;
             }

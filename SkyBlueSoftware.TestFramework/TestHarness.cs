@@ -19,9 +19,9 @@ namespace SkyBlueSoftware.TestFramework
             projectPath = @"..\..\..\";
         }
 
-        public void Verify(object o)
+        public void Verify(object o, string? fileNameOverride = null)
         {
-            var fileName = $"{TestMethodName()}.json";
+            var fileName = $"{fileNameOverride ?? TestMethodName()}.json";
             var projectFileName = $"{projectPath}{fileName}";
             var actual = CreateActual(o);
             var expected = ReadExpected(projectFileName);
@@ -45,12 +45,12 @@ namespace SkyBlueSoftware.TestFramework
         {
             var result = string.Empty;
             var frames = new StackTrace().GetFrames();
-            if (frames == null) return result;
             foreach (var frame in frames)
             {
                 if (frame == null) continue;
                 var methodBase = frame.GetMethod();
                 if (methodBase == null) continue;
+                var methodName = methodBase.Name;
                 foreach (var customAttributeData in methodBase.CustomAttributes)
                 {
                     if (customAttributeData.AttributeType == typeof(TestMethodAttribute) || customAttributeData.AttributeType == typeof(TestInitializeAttribute))
