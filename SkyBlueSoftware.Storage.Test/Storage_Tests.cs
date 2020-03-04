@@ -39,15 +39,10 @@ namespace SkyBlueSoftware.Storage.Test
                 var id = await r.GetValueAsync<int>("Id");
                 var date = await r.GetValueAsync<DateTime>("Date");
                 var text = await r.GetValueAsync<string>("Text");
-                results.Add($"{id};{date};{text}");
+                results.Add($"{id};{date:M/d/yyyy HH:mm:ss};{text}");
             }
 
             t.Verify(results);
-
-            foreach (var line in System.IO.File.ReadAllLines(@"..\..\..\Storage_Tests_Sqlite.json"))
-            {
-                Console.WriteLine(line);
-            }
         }
 
 #if !IsBuildServer
