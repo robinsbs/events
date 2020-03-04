@@ -14,12 +14,12 @@ namespace SkyBlueSoftware.Storage.Test
     [TestClass]
     public class Storage_Tests
     {
-        private TestHarness t = new TestHarness();
+        private TestHarness t = TestHarness.Create();
 
         [TestInitialize]
         public void Initialize()
         {
-            t = new TestHarness();
+            t = TestHarness.Create();
         }
 
         /// <summary>
@@ -110,10 +110,10 @@ namespace SkyBlueSoftware.Storage.Test
             }
         }
 
-        private IDictionary<string, int> CreateColumns(DbDataReader reader)
+        private ILookup<string, int> CreateColumns(DbDataReader reader)
         {
             var fieldCount = reader.FieldCount;
-            var columns = new Dictionary<string, int>(fieldCount, StringComparer.OrdinalIgnoreCase);
+            var columns = LookupCollection.CreateLookupCollection<string, int>(x => -1, fieldCount, StringComparer.OrdinalIgnoreCase);
             for (var i = 0; i < fieldCount; i++)
             {
                 columns[reader.GetName(i)] = i;
@@ -124,10 +124,10 @@ namespace SkyBlueSoftware.Storage.Test
         public class Record : IRecord
         {
             private readonly DbDataReader reader;
-            private readonly IDictionary<string, int> columns;
+            private readonly ILookup<string, int> columns;
             private readonly CancellationToken token;
 
-            public Record(DbDataReader reader, IDictionary<string, int> columns, CancellationToken token)
+            public Record(DbDataReader reader, ILookup<string, int> columns, CancellationToken token)
             {
                 this.reader = reader;
                 this.columns = columns;
