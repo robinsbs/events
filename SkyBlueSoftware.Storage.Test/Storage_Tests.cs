@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
+using SkyBlueSoftware.Framework;
 using SkyBlueSoftware.TestFramework;
 
 namespace SkyBlueSoftware.Storage.Test
@@ -39,7 +40,7 @@ namespace SkyBlueSoftware.Storage.Test
                 var id = await r.GetValueAsync<int>("Id");
                 var date = await r.GetValueAsync<DateTime>("Date");
                 var text = await r.GetValueAsync<string>("Text");
-                results.Add($"{id};{date:M/d/yyyy HH:mm:ss};{text}");
+                results.Add($"{id};{date.MDYHH()};{text}");
             }
 
             t.Verify(results);
