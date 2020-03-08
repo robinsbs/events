@@ -104,6 +104,42 @@ namespace SkyBlueSoftware.Storage.Test
 
             t.Verify(results);
         }
+
+        [TestMethod]
+        public void Storage_Tests_SqliteDataProvider_Columns()
+        {
+            var results = new List<string>();
+
+            var dataProvider = new DataProvider();
+
+            foreach (var r in dataProvider.Execute("select * from document"))
+            {
+                var id = r.GetValue<int>("Id");
+                var date = r.GetValue<DateTime>("Date");
+                var text = r.GetValue<string>("Text");
+                results.Add($"{id};{date.MDYHH()};{text}");
+            }
+
+            t.Verify(results);
+        }
+
+        [TestMethod]
+        public void Storage_Tests_SqliteDataProvider_Ordinals()
+        {
+            var results = new List<string>();
+
+            var dataProvider = new DataProvider();
+
+            foreach (var r in dataProvider.Execute("select * from document"))
+            {
+                var id = r.GetValue<int>(0);
+                var date = r.GetValue<DateTime>(1);
+                var text = r.GetValue<string>(2);
+                results.Add($"{id};{date.MDYHH()};{text}");
+            }
+
+            t.Verify(results);
+        }
     }
 
     public interface IRecord
