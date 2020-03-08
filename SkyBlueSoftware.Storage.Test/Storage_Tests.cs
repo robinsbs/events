@@ -87,30 +87,75 @@ namespace SkyBlueSoftware.Storage.Test
             return columns;
         }
 
-        public class Record : IRecord
+        [TestMethod]
+        public void Test_Drive_IDataProvider()
         {
-            private readonly DbDataReader reader;
-            private readonly ILookup<string, int> columns;
+            var results = new List<string>();
 
-            public Record(DbDataReader reader, ILookup<string, int> columns)
+            var dataProvider = new DataProvider();
+
+            foreach (var r in dataProvider.Execute("select * from document"))
             {
-                this.reader = reader;
-                this.columns = columns;
+                var id = r.GetValue<int>("Id");
+                var date = r.GetValue<DateTime>("Date");
+                var text = r.GetValue<string>("Text");
+                results.Add($"{id};{date.MDYHH()};{text}");
             }
 
-            public T GetValue<T>(int ordinal) => reader.GetFieldValue<T>(ordinal);
-            public T GetValue<T>(string name) => GetValue<T>(columns[name]);
+            t.Verify(results);
+        }
+    }
+
+    public interface IRecord
+    {
+        // column name
+        // column ordinal
+        // columns
+        // get values
+        // isdbnull
+        public T GetValue<T>(int ordinal);
+        public T GetValue<T>(string name);
+    }
+
+    public class Record : IRecord
+    {
+        private readonly DbDataReader reader;
+        private readonly ILookup<string, int> columns;
+
+        public Record(DbDataReader reader, ILookup<string, int> columns)
+        {
+            this.reader = reader;
+            this.columns = columns;
         }
 
-        public interface IRecord
+        public T GetValue<T>(int ordinal) => reader.GetFieldValue<T>(ordinal);
+        public T GetValue<T>(string name) => GetValue<T>(columns[name]);
+    }
+
+    public class DataProvider
+    {
+        public IEnumerable<IRecord> Execute(string command)
         {
-            // column name
-            // column ordinal
-            // columns
-            // get values
-            // isdbnull
-            public T GetValue<T>(int ordinal);
-            public T GetValue<T>(string name);
+            using var connection = new SqliteConnection(@"Data Source=..\..\..\sqlite.db");
+            connection.Open();
+            using var dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = command;
+            using var reader = dbCommand.ExecuteReader();
+            while (reader.Read())
+            {
+                yield return new Record(reader, CreateColumns(reader));
+            }
+        }
+
+        private ILookup<string, int> CreateColumns(DbDataReader reader)
+        {
+            var fieldCount = reader.FieldCount;
+            var columns = LookupCollection.CreateLookupCollection<string, int>(x => -1, fieldCount, StringComparer.OrdinalIgnoreCase);
+            for (var i = 0; i < fieldCount; i++)
+            {
+                columns[reader.GetName(i)] = i;
+            }
+            return columns;
         }
     }
 }
