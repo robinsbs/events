@@ -88,29 +88,11 @@ namespace SkyBlueSoftware.Storage.Test
         }
 
         [TestMethod]
-        public void Test_Drive_IDataProvider()
-        {
-            var results = new List<string>();
-
-            var dataProvider = new DataProvider();
-
-            foreach (var r in dataProvider.Execute("select * from document"))
-            {
-                var id = r.GetValue<int>("Id");
-                var date = r.GetValue<DateTime>("Date");
-                var text = r.GetValue<string>("Text");
-                results.Add($"{id};{date.MDYHH()};{text}");
-            }
-
-            t.Verify(results);
-        }
-
-        [TestMethod]
         public void Storage_Tests_SqliteDataProvider_Columns()
         {
             var results = new List<string>();
 
-            var dataProvider = new DataProvider();
+            var dataProvider = new SqliteDataProvider();
 
             foreach (var r in dataProvider.Execute("select * from document"))
             {
@@ -128,13 +110,49 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            var dataProvider = new DataProvider();
+            var dataProvider = new SqliteDataProvider();
 
             foreach (var r in dataProvider.Execute("select * from document"))
             {
                 var id = r.GetValue<int>(0);
                 var date = r.GetValue<DateTime>(1);
                 var text = r.GetValue<string>(2);
+                results.Add($"{id};{date.MDYHH()};{text}");
+            }
+
+            t.Verify(results);
+        }
+
+        [TestMethod]
+        public void Storage_Tests_SqlServerDataProvider_Ordinals()
+        {
+            var results = new List<string>();
+
+            var dataProvider = new SqlServerDataProvider();
+
+            foreach (var r in dataProvider.Execute("select * from document"))
+            {
+                var id = r.GetValue<int>(0);
+                var date = r.GetValue<DateTime>(1);
+                var text = r.GetValue<string>(2);
+                results.Add($"{id};{date.MDYHH()};{text}");
+            }
+
+            t.Verify(results);
+        }
+
+        [TestMethod]
+        public void Storage_Tests_SqlServerDataProvider_Columns()
+        {
+            var results = new List<string>();
+
+            var dataProvider = new SqlServerDataProvider();
+
+            foreach (var r in dataProvider.Execute("select * from document"))
+            {
+                var id = r.GetValue<int>("Id");
+                var date = r.GetValue<DateTime>("Date");
+                var text = r.GetValue<string>("Text");
                 results.Add($"{id};{date.MDYHH()};{text}");
             }
 
@@ -168,7 +186,34 @@ namespace SkyBlueSoftware.Storage.Test
         public T GetValue<T>(string name) => GetValue<T>(columns[name]);
     }
 
-    public class DataProvider
+    public class SqlServerDataProvider
+    {
+        public IEnumerable<IRecord> Execute(string command)
+        {
+            using var connection = new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true");
+            connection.Open();
+            using var dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = command;
+            using var reader = dbCommand.ExecuteReader();
+            while (reader.Read())
+            {
+                yield return new Record(reader, CreateColumns(reader));
+            }
+        }
+
+        private ILookup<string, int> CreateColumns(DbDataReader reader)
+        {
+            var fieldCount = reader.FieldCount;
+            var columns = LookupCollection.CreateLookupCollection<string, int>(x => -1, fieldCount, StringComparer.OrdinalIgnoreCase);
+            for (var i = 0; i < fieldCount; i++)
+            {
+                columns[reader.GetName(i)] = i;
+            }
+            return columns;
+        }
+    }
+
+    public class SqliteDataProvider
     {
         public IEnumerable<IRecord> Execute(string command)
         {
