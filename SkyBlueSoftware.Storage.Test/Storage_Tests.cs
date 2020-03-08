@@ -4,8 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Threading;
-using System.Threading.Tasks;
 using SkyBlueSoftware.Framework;
 using SkyBlueSoftware.TestFramework;
 
@@ -46,29 +44,13 @@ namespace SkyBlueSoftware.Storage.Test
             t.Verify(results);
         }
 
-        [TestMethod]
-        public async Task Storage_Tests_Sqlite_Async()
-        {
-            var results = new List<string>();
-
-            await foreach(var r in ReadAsync(() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db"), "select * from document"))
-            {
-                var id = r.GetValue<int>("Id");
-                var date = r.GetValue<DateTime>("Date");
-                var text = r.GetValue<string>("Text");
-                results.Add($"{id};{date.MDYHH()};{text}");
-            }
-
-            t.Verify(results);
-        }
-
 #if !IsBuildServer
         [TestMethod]
-        public async Task Storage_Tests_SqlServer()
+        public void Storage_Tests_SqlServer()
         {
             var results = new List<string>();
 
-            await foreach (var r in ReadAsync(() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true"), "select * from document"))
+            foreach (var r in Read(() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true"), "select * from document"))
             {
                 var id = r.GetValue<int>("Id");
                 var date = r.GetValue<DateTime>("Date");
@@ -89,22 +71,6 @@ namespace SkyBlueSoftware.Storage.Test
             var reader = dbCommand.ExecuteReader();
             var columns = CreateColumns(reader);
             while (reader.Read())
-            {
-                yield return new Record(reader, columns);
-            }
-        }
-
-        private async IAsyncEnumerable<IRecord> ReadAsync(Func<DbConnection> connectionFactory, string command)
-        {
-            var source = new CancellationTokenSource();
-            var token = source.Token;
-            await using var connection = connectionFactory();
-            await connection.OpenAsync(token);
-            await using var dbCommand = connection.CreateCommand();
-            dbCommand.CommandText = command;
-            var reader = await dbCommand.ExecuteReaderAsync(token);
-            var columns = CreateColumns(reader);
-            while (await reader.ReadAsync(token))
             {
                 yield return new Record(reader, columns);
             }
