@@ -53,9 +53,9 @@ namespace SkyBlueSoftware.Storage.Test
 
             await foreach(var r in ReadAsync(() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db"), "select * from document"))
             {
-                var id = await r.GetValueAsync<int>("Id");
-                var date = await r.GetValueAsync<DateTime>("Date");
-                var text = await r.GetValueAsync<string>("Text");
+                var id = r.GetValue<int>("Id");
+                var date = r.GetValue<DateTime>("Date");
+                var text = r.GetValue<string>("Text");
                 results.Add($"{id};{date.MDYHH()};{text}");
             }
 
@@ -70,9 +70,9 @@ namespace SkyBlueSoftware.Storage.Test
 
             await foreach (var r in ReadAsync(() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true"), "select * from document"))
             {
-                var id = await r.GetValueAsync<int>("Id");
-                var date = await r.GetValueAsync<DateTime>("Date");
-                var text = await r.GetValueAsync<string>("Text");
+                var id = r.GetValue<int>("Id");
+                var date = r.GetValue<DateTime>("Date");
+                var text = r.GetValue<string>("Text");
                 results.Add($"{id};{date.MDYHH()};{text}");
             }
 
@@ -90,7 +90,7 @@ namespace SkyBlueSoftware.Storage.Test
             var columns = CreateColumns(reader);
             while (reader.Read())
             {
-                yield return new Record(reader, columns, CancellationToken.None);
+                yield return new Record(reader, columns);
             }
         }
 
@@ -106,7 +106,7 @@ namespace SkyBlueSoftware.Storage.Test
             var columns = CreateColumns(reader);
             while (await reader.ReadAsync(token))
             {
-                yield return new Record(reader, columns, token);
+                yield return new Record(reader, columns);
             }
         }
 
@@ -125,19 +125,15 @@ namespace SkyBlueSoftware.Storage.Test
         {
             private readonly DbDataReader reader;
             private readonly ILookup<string, int> columns;
-            private readonly CancellationToken token;
 
-            public Record(DbDataReader reader, ILookup<string, int> columns, CancellationToken token)
+            public Record(DbDataReader reader, ILookup<string, int> columns)
             {
                 this.reader = reader;
                 this.columns = columns;
-                this.token = token;
             }
 
             public T GetValue<T>(int ordinal) => reader.GetFieldValue<T>(ordinal);
             public T GetValue<T>(string name) => GetValue<T>(columns[name]);
-            public Task<T> GetValueAsync<T>(int ordinal) => reader.GetFieldValueAsync<T>(ordinal, token);
-            public Task<T> GetValueAsync<T>(string name) => GetValueAsync<T>(columns[name]);
         }
 
         public interface IRecord
@@ -149,8 +145,6 @@ namespace SkyBlueSoftware.Storage.Test
             // isdbnull
             public T GetValue<T>(int ordinal);
             public T GetValue<T>(string name);
-            public Task<T> GetValueAsync<T>(int ordinal);
-            public Task<T> GetValueAsync<T>(string name);
         }
     }
 }
