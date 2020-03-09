@@ -189,9 +189,9 @@ namespace SkyBlueSoftware.Storage.Test
         public T GetValue<T>(string name) => GetValue<T>(columns[name]);
     }
 
-    public class SqlServerDataProvider
+    public class SqlServerDataProvider : DataProvider
     {
-        public IEnumerable<IRecord> Execute(string command)
+        public override IEnumerable<IRecord> Execute(string command)
         {
             using var connection = new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true");
             connection.Open();
@@ -203,22 +203,11 @@ namespace SkyBlueSoftware.Storage.Test
                 yield return new Record(reader, CreateColumns(reader));
             }
         }
-
-        private ILookup<string, int> CreateColumns(DbDataReader reader)
-        {
-            var fieldCount = reader.FieldCount;
-            var columns = LookupCollection.CreateLookupCollection<string, int>(x => -1, fieldCount, StringComparer.OrdinalIgnoreCase);
-            for (var i = 0; i < fieldCount; i++)
-            {
-                columns[reader.GetName(i)] = i;
-            }
-            return columns;
-        }
     }
 
-    public class SqliteDataProvider
+    public class SqliteDataProvider : DataProvider
     {
-        public IEnumerable<IRecord> Execute(string command)
+        public override IEnumerable<IRecord> Execute(string command)
         {
             using var connection = new SqliteConnection(@"Data Source=..\..\..\sqlite.db");
             connection.Open();
@@ -230,8 +219,18 @@ namespace SkyBlueSoftware.Storage.Test
                 yield return new Record(reader, CreateColumns(reader));
             }
         }
+    }
 
-        private ILookup<string, int> CreateColumns(DbDataReader reader)
+    public interface IDataProvider
+    {
+        IEnumerable<IRecord> Execute(string command);
+    }
+
+    public abstract class DataProvider : IDataProvider
+    {
+        public abstract IEnumerable<IRecord> Execute(string command);
+
+        protected ILookup<string, int> CreateColumns(DbDataReader reader)
         {
             var fieldCount = reader.FieldCount;
             var columns = LookupCollection.CreateLookupCollection<string, int>(x => -1, fieldCount, StringComparer.OrdinalIgnoreCase);
