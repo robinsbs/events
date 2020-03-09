@@ -123,6 +123,7 @@ namespace SkyBlueSoftware.Storage.Test
             t.Verify(results);
         }
 
+#if !IsBuildServer
         [TestMethod]
         public void Storage_Tests_SqlServerDataProvider_Ordinals()
         {
@@ -158,6 +159,8 @@ namespace SkyBlueSoftware.Storage.Test
 
             t.Verify(results);
         }
+#endif
+
     }
 
     public interface IRecord
