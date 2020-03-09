@@ -3,6 +3,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using SkyBlueSoftware.Framework;
 using SkyBlueSoftware.TestFramework;
@@ -189,11 +190,11 @@ namespace SkyBlueSoftware.Storage.Test
         public T GetValue<T>(string name) => GetValue<T>(columns[name]);
     }
 
-    public class SqlServerDataProvider : DataProvider
+    public class SqlServerDataProvider : DataProvider<SqlConnection>
     {
         public override IEnumerable<IRecord> Execute(string command)
         {
-            using var connection = new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true");
+            using var connection = CreateConnection();
             connection.Open();
             using var dbCommand = connection.CreateCommand();
             dbCommand.CommandText = command;
@@ -203,13 +204,15 @@ namespace SkyBlueSoftware.Storage.Test
                 yield return new Record(reader, CreateColumns(reader));
             }
         }
+
+        protected override SqlConnection CreateConnection() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true");
     }
 
-    public class SqliteDataProvider : DataProvider
+    public class SqliteDataProvider : DataProvider<SqliteConnection>
     {
         public override IEnumerable<IRecord> Execute(string command)
         {
-            using var connection = new SqliteConnection(@"Data Source=..\..\..\sqlite.db");
+            using var connection = CreateConnection();
             connection.Open();
             using var dbCommand = connection.CreateCommand();
             dbCommand.CommandText = command;
@@ -219,6 +222,8 @@ namespace SkyBlueSoftware.Storage.Test
                 yield return new Record(reader, CreateColumns(reader));
             }
         }
+
+        protected override SqliteConnection CreateConnection() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db");
     }
 
     public interface IDataProvider
@@ -226,9 +231,11 @@ namespace SkyBlueSoftware.Storage.Test
         IEnumerable<IRecord> Execute(string command);
     }
 
-    public abstract class DataProvider : IDataProvider
+    public abstract class DataProvider<T> : IDataProvider where T : IDbConnection
     {
         public abstract IEnumerable<IRecord> Execute(string command);
+
+        protected abstract T CreateConnection();
 
         protected ILookup<string, int> CreateColumns(DbDataReader reader)
         {
