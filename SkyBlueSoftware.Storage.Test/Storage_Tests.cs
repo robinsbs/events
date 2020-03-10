@@ -3,7 +3,6 @@ using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
 using SkyBlueSoftware.Framework;
 using SkyBlueSoftware.TestFramework;
@@ -34,7 +33,8 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            foreach(var r in Read(() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db"), "select * from document"))
+            var r = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db").ExecuteReader("select * from document");
+            while (r.Read())
             {
                 var id = r.GetValue<int>("Id");
                 var date = r.GetValue<DateTime>("Date");
@@ -51,7 +51,8 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            foreach (var r in Read(() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true"), "select * from document"))
+            var r = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true").ExecuteReader("select * from document");
+            while (r.Read())
             {
                 var id = r.GetValue<int>("Id");
                 var date = r.GetValue<DateTime>("Date");
@@ -63,39 +64,15 @@ namespace SkyBlueSoftware.Storage.Test
         }
 #endif
 
-        private IEnumerable<IRecord> Read(Func<DbConnection> connectionFactory, string command)
-        {
-            using var connection = connectionFactory();
-            connection.Open();
-            using var dbCommand = connection.CreateCommand();
-            dbCommand.CommandText = command;
-            var reader = dbCommand.ExecuteReader();
-            var columns = CreateColumns(reader);
-            while (reader.Read())
-            {
-                yield return new Record(reader, columns);
-            }
-        }
-
-        private ILookup<string, int> CreateColumns(DbDataReader reader)
-        {
-            var fieldCount = reader.FieldCount;
-            var columns = LookupCollection.CreateLookupCollection<string, int>(x => -1, fieldCount, StringComparer.OrdinalIgnoreCase);
-            for (var i = 0; i < fieldCount; i++)
-            {
-                columns[reader.GetName(i)] = i;
-            }
-            return columns;
-        }
-
         [TestMethod]
         public void Storage_Tests_SqliteDataProvider_Columns()
         {
             var results = new List<string>();
 
-            var dataProvider = new SqliteDataProvider();
+            IDataProvider dataProvider = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
 
-            foreach (var r in dataProvider.Execute("select * from document"))
+            IDataReader r = dataProvider.ExecuteReader("select * from document");
+            while (r.Read())
             {
                 var id = r.GetValue<int>("Id");
                 var date = r.GetValue<DateTime>("Date");
@@ -111,9 +88,9 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            var dataProvider = new SqliteDataProvider();
-
-            foreach (var r in dataProvider.Execute("select * from document"))
+            IDataProvider dataProvider = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
+            IDataReader r = dataProvider.ExecuteReader("select * from document");
+            while (r.Read())
             {
                 var id = r.GetValue<int>(0);
                 var date = r.GetValue<DateTime>(1);
@@ -130,9 +107,10 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            var dataProvider = new SqlServerDataProvider();
+            IDataProvider dataProvider = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true");
 
-            foreach (var r in dataProvider.Execute("select * from document"))
+            IDataReader r = dataProvider.ExecuteReader("select * from document");
+            while (r.Read())
             {
                 var id = r.GetValue<int>(0);
                 var date = r.GetValue<DateTime>(1);
@@ -148,9 +126,10 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            var dataProvider = new SqlServerDataProvider();
+            var dataProvider = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true");
 
-            foreach (var r in dataProvider.Execute("select * from document"))
+            var r = dataProvider.ExecuteReader("select * from document");
+            while (r.Read())
             {
                 var id = r.GetValue<int>("Id");
                 var date = r.GetValue<DateTime>("Date");
@@ -164,78 +143,100 @@ namespace SkyBlueSoftware.Storage.Test
 
     }
 
-    public interface IRecord
+    public class SqlServerDataProvider : DataProvider
     {
-        // column name
-        // column ordinal
-        // columns
-        // get values
-        // isdbnull
-        public T GetValue<T>(int ordinal);
-        public T GetValue<T>(string name);
+        private readonly string connectionString;
+
+        public SqlServerDataProvider(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
+        public override IDataReader ExecuteReader(string command)
+        {
+            var connection = new SqlConnection(connectionString);
+            connection.Open();
+            var dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = command;
+            var reader = dbCommand.ExecuteReader();
+            return new DataReader(connection, dbCommand, reader, CreateColumns(reader));
+        }
     }
 
-    public class Record : IRecord
+    public class SqliteDataProvider : DataProvider
     {
+        private readonly string connectionString;
+
+        public SqliteDataProvider(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
+        public override IDataReader ExecuteReader(string command)
+        {
+            var connection = new SqliteConnection(connectionString);
+            connection.Open();
+            var dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = command;
+            var reader = dbCommand.ExecuteReader();
+            return new DataReader(connection, dbCommand, reader, CreateColumns(reader));
+        }
+    }
+
+    public interface IDataReader : IDisposable
+    {
+        bool Read();
+        T GetValue<T>(int ordinal);
+        T GetValue<T>(string name);
+    }
+
+    public class DataReader : IDataReader
+    {
+        private readonly IDisposable connection;
+        private readonly IDisposable dbCommand;
         private readonly DbDataReader reader;
         private readonly ILookup<string, int> columns;
 
-        public Record(DbDataReader reader, ILookup<string, int> columns)
+        public DataReader(IDisposable connection, IDisposable dbCommand, DbDataReader reader, ILookup<string, int> columns)
         {
+            this.connection = connection;
+            this.dbCommand = dbCommand;
             this.reader = reader;
             this.columns = columns;
         }
 
+        public bool Read() => reader.Read();
         public T GetValue<T>(int ordinal) => reader.GetFieldValue<T>(ordinal);
         public T GetValue<T>(string name) => GetValue<T>(columns[name]);
-    }
 
-    public class SqlServerDataProvider : DataProvider<SqlConnection>
-    {
-        public override IEnumerable<IRecord> Execute(string command)
+        public void Dispose()
         {
-            using var connection = CreateConnection();
-            connection.Open();
-            using var dbCommand = connection.CreateCommand();
-            dbCommand.CommandText = command;
-            using var reader = dbCommand.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                yield return new Record(reader, CreateColumns(reader));
+                reader.Dispose();
+            }
+            finally
+            {
+                try
+                {
+                    dbCommand.Dispose();
+                }
+                finally
+                {
+                    connection.Dispose();
+                }
             }
         }
-
-        protected override SqlConnection CreateConnection() => new SqlConnection(@"Data Source=(local);Database=SBS;Integrated Security=true");
-    }
-
-    public class SqliteDataProvider : DataProvider<SqliteConnection>
-    {
-        public override IEnumerable<IRecord> Execute(string command)
-        {
-            using var connection = CreateConnection();
-            connection.Open();
-            using var dbCommand = connection.CreateCommand();
-            dbCommand.CommandText = command;
-            using var reader = dbCommand.ExecuteReader();
-            while (reader.Read())
-            {
-                yield return new Record(reader, CreateColumns(reader));
-            }
-        }
-
-        protected override SqliteConnection CreateConnection() => new SqliteConnection(@"Data Source=..\..\..\sqlite.db");
     }
 
     public interface IDataProvider
     {
-        IEnumerable<IRecord> Execute(string command);
+        IDataReader ExecuteReader(string command);
     }
 
-    public abstract class DataProvider<T> : IDataProvider where T : IDbConnection
+    public abstract class DataProvider : IDataProvider
     {
-        public abstract IEnumerable<IRecord> Execute(string command);
-
-        protected abstract T CreateConnection();
+        public abstract IDataReader ExecuteReader(string command);
 
         protected ILookup<string, int> CreateColumns(DbDataReader reader)
         {
