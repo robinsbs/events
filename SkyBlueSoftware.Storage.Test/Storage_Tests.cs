@@ -161,7 +161,7 @@ namespace SkyBlueSoftware.Storage.Test
             var dbCommand = connection.CreateCommand();
             dbCommand.CommandText = command;
             var reader = dbCommand.ExecuteReader();
-            var dataReader = new DataReader(connection, dbCommand, reader, CreateColumns(reader));
+            var dataReader = new DataReader(reader, CreateColumns(reader));
             while (dataReader.Read())
             {
                 yield return dataReader;
@@ -180,12 +180,12 @@ namespace SkyBlueSoftware.Storage.Test
 
         public override IEnumerable<IDataRow> Execute(string command)
         {
-            var connection = new SqliteConnection(connectionString);
+            using var connection = new SqliteConnection(connectionString);
             connection.Open();
-            var dbCommand = connection.CreateCommand();
+            using var dbCommand = connection.CreateCommand();
             dbCommand.CommandText = command;
-            var reader = dbCommand.ExecuteReader();
-            var dataReader = new DataReader(connection, dbCommand, reader, CreateColumns(reader));
+            using var reader = dbCommand.ExecuteReader();
+            var dataReader = new DataReader(reader, CreateColumns(reader));
             while (dataReader.Read())
             {
                 yield return dataReader;
@@ -199,22 +199,13 @@ namespace SkyBlueSoftware.Storage.Test
         T GetValue<T>(string name);
     }
 
-    public interface IDataReader : IDataRow, IDisposable
+    public class DataReader : IDataRow
     {
-        bool Read();
-    }
-
-    public class DataReader : IDataReader
-    {
-        private readonly IDisposable connection;
-        private readonly IDisposable dbCommand;
         private readonly DbDataReader reader;
         private readonly ILookup<string, int> columns;
 
-        public DataReader(IDisposable connection, IDisposable dbCommand, DbDataReader reader, ILookup<string, int> columns)
+        public DataReader(DbDataReader reader, ILookup<string, int> columns)
         {
-            this.connection = connection;
-            this.dbCommand = dbCommand;
             this.reader = reader;
             this.columns = columns;
         }
@@ -222,25 +213,6 @@ namespace SkyBlueSoftware.Storage.Test
         public bool Read() => reader.Read();
         public T GetValue<T>(int ordinal) => reader.GetFieldValue<T>(ordinal);
         public T GetValue<T>(string name) => GetValue<T>(columns[name]);
-
-        public void Dispose()
-        {
-            try
-            {
-                reader.Dispose();
-            }
-            finally
-            {
-                try
-                {
-                    dbCommand.Dispose();
-                }
-                finally
-                {
-                    connection.Dispose();
-                }
-            }
-        }
     }
 
     public interface IDataProvider
