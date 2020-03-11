@@ -33,8 +33,9 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            var r = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db").ExecuteReader("select * from document");
-            while (r.Read())
+            var dataProvider = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
+            var rows = dataProvider.Execute("select * from document");
+            foreach (var r in rows)
             {
                 var id = r.GetValue<int>("Id");
                 var date = r.GetValue<DateTime>("Date");
@@ -51,8 +52,9 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            var r = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true").ExecuteReader("select * from document");
-            while (r.Read())
+            var dataProvider = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true");
+            var rows = dataProvider.Execute("select * from document");
+            foreach (var r in rows)
             {
                 var id = r.GetValue<int>("Id");
                 var date = r.GetValue<DateTime>("Date");
@@ -69,10 +71,10 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            IDataProvider dataProvider = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
+            var dataProvider = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
 
-            IDataReader r = dataProvider.ExecuteReader("select * from document");
-            while (r.Read())
+            var rows = dataProvider.Execute("select * from document");
+            foreach (var r in rows)
             {
                 var id = r.GetValue<int>("Id");
                 var date = r.GetValue<DateTime>("Date");
@@ -88,9 +90,9 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            IDataProvider dataProvider = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
-            IDataReader r = dataProvider.ExecuteReader("select * from document");
-            while (r.Read())
+            var dataProvider = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
+            var rows = dataProvider.Execute("select * from document");
+            foreach (var r in rows)
             {
                 var id = r.GetValue<int>(0);
                 var date = r.GetValue<DateTime>(1);
@@ -107,10 +109,10 @@ namespace SkyBlueSoftware.Storage.Test
         {
             var results = new List<string>();
 
-            IDataProvider dataProvider = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true");
+            var dataProvider = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true");
 
-            IDataReader r = dataProvider.ExecuteReader("select * from document");
-            while (r.Read())
+            var rows = dataProvider.Execute("select * from document");
+            foreach (var r in rows)
             {
                 var id = r.GetValue<int>(0);
                 var date = r.GetValue<DateTime>(1);
@@ -128,8 +130,8 @@ namespace SkyBlueSoftware.Storage.Test
 
             var dataProvider = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true");
 
-            var r = dataProvider.ExecuteReader("select * from document");
-            while (r.Read())
+            var rows = dataProvider.Execute("select * from document");
+            foreach (var r in rows)
             {
                 var id = r.GetValue<int>("Id");
                 var date = r.GetValue<DateTime>("Date");
@@ -152,14 +154,18 @@ namespace SkyBlueSoftware.Storage.Test
             this.connectionString = connectionString;
         }
 
-        public override IDataReader ExecuteReader(string command)
+        public override IEnumerable<IDataRow> Execute(string command)
         {
             var connection = new SqlConnection(connectionString);
             connection.Open();
             var dbCommand = connection.CreateCommand();
             dbCommand.CommandText = command;
             var reader = dbCommand.ExecuteReader();
-            return new DataReader(connection, dbCommand, reader, CreateColumns(reader));
+            var dataReader = new DataReader(connection, dbCommand, reader, CreateColumns(reader));
+            while (dataReader.Read())
+            {
+                yield return dataReader;
+            }
         }
     }
 
@@ -172,22 +178,30 @@ namespace SkyBlueSoftware.Storage.Test
             this.connectionString = connectionString;
         }
 
-        public override IDataReader ExecuteReader(string command)
+        public override IEnumerable<IDataRow> Execute(string command)
         {
             var connection = new SqliteConnection(connectionString);
             connection.Open();
             var dbCommand = connection.CreateCommand();
             dbCommand.CommandText = command;
             var reader = dbCommand.ExecuteReader();
-            return new DataReader(connection, dbCommand, reader, CreateColumns(reader));
+            var dataReader = new DataReader(connection, dbCommand, reader, CreateColumns(reader));
+            while (dataReader.Read())
+            {
+                yield return dataReader;
+            }
         }
     }
 
-    public interface IDataReader : IDisposable
+    public interface IDataRow
     {
-        bool Read();
         T GetValue<T>(int ordinal);
         T GetValue<T>(string name);
+    }
+
+    public interface IDataReader : IDataRow, IDisposable
+    {
+        bool Read();
     }
 
     public class DataReader : IDataReader
@@ -231,12 +245,12 @@ namespace SkyBlueSoftware.Storage.Test
 
     public interface IDataProvider
     {
-        IDataReader ExecuteReader(string command);
+        IEnumerable<IDataRow> Execute(string command);
     }
 
     public abstract class DataProvider : IDataProvider
     {
-        public abstract IDataReader ExecuteReader(string command);
+        public abstract IEnumerable<IDataRow> Execute(string command);
 
         protected ILookup<string, int> CreateColumns(DbDataReader reader)
         {
