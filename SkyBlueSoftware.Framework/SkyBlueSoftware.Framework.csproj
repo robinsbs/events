@@ -1,11 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net461</TargetFrameworks>
+    <Copyright>Copyright (c) 2020 Sky Blue Software</Copyright>
+    <Description>A framework for .NET Core applications.</Description>
+    <Authors>Sky Blue Software</Authors>
+    <Company>Sky Blue Software</Company>
+    <Product>Sky Blue Software - Framework</Product>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.1|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>

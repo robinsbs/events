@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SkyBlueSoftware.Framework\SkyBlueSoftware.Framework.csproj" />
+    <ProjectReference Include="..\SkyBlueSoftware.Storage\SkyBlueSoftware.Storage.csproj" />
     <ProjectReference Include="..\SkyBlueSoftware.TestFramework\SkyBlueSoftware.TestFramework.csproj" />
   </ItemGroup>
 

@@ -1,9 +1,6 @@
-using Microsoft.Data.SqlClient;
-using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using SkyBlueSoftware.Framework;
 using SkyBlueSoftware.TestFramework;
 
@@ -143,96 +140,5 @@ namespace SkyBlueSoftware.Storage.Test
         }
 #endif
 
-    }
-
-    public class SqlServerDataProvider : DataProvider
-    {
-        private readonly string connectionString;
-
-        public SqlServerDataProvider(string connectionString)
-        {
-            this.connectionString = connectionString;
-        }
-
-        public override IEnumerable<IDataRow> Execute(string command)
-        {
-            var connection = new SqlConnection(connectionString);
-            connection.Open();
-            var dbCommand = connection.CreateCommand();
-            dbCommand.CommandText = command;
-            var reader = dbCommand.ExecuteReader();
-            var dataReader = new DataReader(reader, CreateColumns(reader));
-            while (dataReader.Read())
-            {
-                yield return dataReader;
-            }
-        }
-    }
-
-    public class SqliteDataProvider : DataProvider
-    {
-        private readonly string connectionString;
-
-        public SqliteDataProvider(string connectionString)
-        {
-            this.connectionString = connectionString;
-        }
-
-        public override IEnumerable<IDataRow> Execute(string command)
-        {
-            using var connection = new SqliteConnection(connectionString);
-            connection.Open();
-            using var dbCommand = connection.CreateCommand();
-            dbCommand.CommandText = command;
-            using var reader = dbCommand.ExecuteReader();
-            var dataReader = new DataReader(reader, CreateColumns(reader));
-            while (dataReader.Read())
-            {
-                yield return dataReader;
-            }
-        }
-    }
-
-    public interface IDataRow
-    {
-        T GetValue<T>(int ordinal);
-        T GetValue<T>(string name);
-    }
-
-    public class DataReader : IDataRow
-    {
-        private readonly DbDataReader reader;
-        private readonly ILookup<string, int> columns;
-
-        public DataReader(DbDataReader reader, ILookup<string, int> columns)
-        {
-            this.reader = reader;
-            this.columns = columns;
-        }
-
-        public bool Read() => reader.Read();
-        public T GetValue<T>(int ordinal) => reader.GetFieldValue<T>(ordinal);
-        public T GetValue<T>(string name) => GetValue<T>(columns[name]);
-    }
-
-    public interface IDataProvider
-    {
-        IEnumerable<IDataRow> Execute(string command);
-    }
-
-    public abstract class DataProvider : IDataProvider
-    {
-        public abstract IEnumerable<IDataRow> Execute(string command);
-
-        protected ILookup<string, int> CreateColumns(DbDataReader reader)
-        {
-            var fieldCount = reader.FieldCount;
-            var columns = LookupCollection.CreateLookupCollection<string, int>(x => -1, fieldCount, StringComparer.OrdinalIgnoreCase);
-            for (var i = 0; i < fieldCount; i++)
-            {
-                columns[reader.GetName(i)] = i;
-            }
-            return columns;
-        }
     }
 }

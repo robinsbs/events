@@ -2,6 +2,6 @@
 {
     public interface ILookup<in TKey, out TValue>
     {
-        public TValue this[TKey key] { get; }
+        TValue this[TKey key] { get; }
     }
 }
