@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net461</TargetFrameworks>
+    <Copyright>Copyright (c) 2020 Sky Blue Software</Copyright>
+    <Description>An storage framework for .NET Core applications.</Description>
+    <Authors>Sky Blue Software</Authors>
+    <Company>Sky Blue Software</Company>
+    <Product>Sky Blue Software - Storage</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.1|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+</Project>

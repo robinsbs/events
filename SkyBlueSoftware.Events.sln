@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Events.View
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Framework.Test", "SkyBlueSoftware.Framework.Test\SkyBlueSoftware.Framework.Test.csproj", "{B7CC8193-4AB7-4D75-8FFF-FEC102A401AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Framework", "SkyBlueSoftware.Framework\SkyBlueSoftware.Framework.csproj", "{5D00ECAF-FA75-4E86-8964-489A9F1D538F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyBlueSoftware.Framework", "SkyBlueSoftware.Framework\SkyBlueSoftware.Framework.csproj", "{5D00ECAF-FA75-4E86-8964-489A9F1D538F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyBlueSoftware.Storage", "SkyBlueSoftware.Storage\SkyBlueSoftware.Storage.csproj", "{B67B5578-B9C4-4A03-A7F0-CE47023389E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{5D00ECAF-FA75-4E86-8964-489A9F1D538F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D00ECAF-FA75-4E86-8964-489A9F1D538F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D00ECAF-FA75-4E86-8964-489A9F1D538F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B67B5578-B9C4-4A03-A7F0-CE47023389E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B67B5578-B9C4-4A03-A7F0-CE47023389E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B67B5578-B9C4-4A03-A7F0-CE47023389E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B67B5578-B9C4-4A03-A7F0-CE47023389E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
