@@ -1,0 +1,1 @@
+vstest.console.exe **\*.Events.Test\bin\debug\*\*test.dll **\*.Events.Test.NuGet\bin\debug\*\*test.nuget.dll **\*.Events.ViewModel.Test\bin\debug\*\*test.dll **\*.Framework.Test\bin\debug\*\*test.dll **\*.Patterns.Test\bin\debug\*\*test.dll **\*.Storage.Test\bin\debug\*\*test.dll

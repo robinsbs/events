@@ -1,0 +1,1 @@
+vstest.console.exe **\*.Framework.Test\bin\debug\*\*test.dll **\*.Storage.Test\bin\debug\*\*test.dll
