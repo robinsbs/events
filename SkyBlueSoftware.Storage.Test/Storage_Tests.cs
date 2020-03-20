@@ -29,119 +29,68 @@ namespace SkyBlueSoftware.Storage.Test
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public void Storage_Tests_Sqlite()
+        public void Storage_Tests_Sqlite_Columns()
         {
-            var results = new List<string>();
+            T(Sqlite(), "select * from document", Columns);
+        }
 
-            var dataProvider = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
-            var rows = dataProvider.Execute("select * from document");
-            foreach (var r in rows)
-            {
-                var id = r.GetValue<int>("Id");
-                var date = r.GetValue<DateTime>("Date");
-                var text = r.GetValue<string>("Text");
-                results.Add($"{id};{date.MDYHH()};{text}");
-            }
-
-            t.Verify(results);
+        [TestMethod]
+        public void Storage_Tests_Sqlite_Ordinals()
+        {
+            T(Sqlite(), "select * from document", Ordinals);
         }
 
 #if !IsBuildServer
         [TestMethod]
-        public void Storage_Tests_SqlServer()
+        public void Storage_Tests_SqlServer_Columns()
         {
-            var results = new List<string>();
+            T(SqlServer(), "select * from document", Columns);
+        }
 
-            var dataProvider = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true");
-            var rows = dataProvider.Execute("select * from document");
-            foreach (var r in rows)
-            {
-                var id = r.GetValue<int>("Id");
-                var date = r.GetValue<DateTime>("Date");
-                var text = r.GetValue<string>("Text");
-                results.Add($"{id};{date.MDYHH()};{text}");
-            }
-
-            t.Verify(results, nameof(Storage_Tests_SqlServer));
+        [TestMethod]
+        public void Storage_Tests_SqlServer_Ordinals()
+        {
+            T(SqlServer(), "select * from document", Ordinals);
         }
 #endif
 
-        [TestMethod]
-        public void Storage_Tests_SqliteDataProvider_Columns()
+        private static SqlServerDataProvider SqlServer()
+        {
+            return new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true");
+        }
+
+        private static SqliteDataProvider Sqlite()
+        {
+            return new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
+        }
+
+        private void T(IDataProvider dataProvider, string command, Func<IDataRow, string> rowSelector)
         {
             var results = new List<string>();
 
-            var dataProvider = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
-
-            var rows = dataProvider.Execute("select * from document");
+            var rows = dataProvider.Execute(command);
             foreach (var r in rows)
             {
-                var id = r.GetValue<int>("Id");
-                var date = r.GetValue<DateTime>("Date");
-                var text = r.GetValue<string>("Text");
-                results.Add($"{id};{date.MDYHH()};{text}");
+                results.Add(rowSelector(r));
             }
 
             t.Verify(results);
         }
 
-        [TestMethod]
-        public void Storage_Tests_SqliteDataProvider_Ordinals()
+        private string Columns(IDataRow r)
         {
-            var results = new List<string>();
-
-            var dataProvider = new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
-            var rows = dataProvider.Execute("select * from document");
-            foreach (var r in rows)
-            {
-                var id = r.GetValue<int>(0);
-                var date = r.GetValue<DateTime>(1);
-                var text = r.GetValue<string>(2);
-                results.Add($"{id};{date.MDYHH()};{text}");
-            }
-
-            t.Verify(results);
+            var id = r.GetValue<int>("Id");
+            var date = r.GetValue<DateTime>("Date");
+            var text = r.GetValue<string>("Text");
+            return $"{id};{date.MDYHH()};{text}";
         }
 
-#if !IsBuildServer
-        [TestMethod]
-        public void Storage_Tests_SqlServerDataProvider_Ordinals()
+        private string Ordinals(IDataRow r)
         {
-            var results = new List<string>();
-
-            var dataProvider = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true");
-
-            var rows = dataProvider.Execute("select * from document");
-            foreach (var r in rows)
-            {
-                var id = r.GetValue<int>(0);
-                var date = r.GetValue<DateTime>(1);
-                var text = r.GetValue<string>(2);
-                results.Add($"{id};{date.MDYHH()};{text}");
-            }
-
-            t.Verify(results);
+            var id = r.GetValue<int>(0);
+            var date = r.GetValue<DateTime>(1);
+            var text = r.GetValue<string>(2);
+            return $"{id};{date.MDYHH()};{text}";
         }
-
-        [TestMethod]
-        public void Storage_Tests_SqlServerDataProvider_Columns()
-        {
-            var results = new List<string>();
-
-            var dataProvider = new SqlServerDataProvider(@"Data Source=(local);Database=SBS;Integrated Security=true");
-
-            var rows = dataProvider.Execute("select * from document");
-            foreach (var r in rows)
-            {
-                var id = r.GetValue<int>("Id");
-                var date = r.GetValue<DateTime>("Date");
-                var text = r.GetValue<string>("Text");
-                results.Add($"{id};{date.MDYHH()};{text}");
-            }
-
-            t.Verify(results);
-        }
-#endif
-
     }
 }
