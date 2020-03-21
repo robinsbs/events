@@ -4,6 +4,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using Microsoft.Data.Sqlite;
 using SkyBlueSoftware.Framework;
 using SkyBlueSoftware.TestFramework;
 
@@ -34,6 +35,12 @@ namespace SkyBlueSoftware.Storage.Test
             T(Sqlite(), "select * from document", Columns);
         }
 
+        [TestMethod, ExpectedException(typeof(SqliteException))]
+        public void Storage_Tests_Sqlite_Proc_Columns()
+        {
+            T(Sqlite(), "DocumentLoad", Columns);
+        }
+
         [TestMethod]
         public void Storage_Tests_Sqlite_Select_Ordinals()
         {
@@ -41,6 +48,18 @@ namespace SkyBlueSoftware.Storage.Test
         }
 
 #if !IsBuildServer
+        [TestMethod]
+        public void Storage_Tests_SqlServer_Proc_Columns()
+        {
+            T(SqlServer(), "DocumentLoad", Columns);
+        }
+
+        [TestMethod]
+        public void Storage_Tests_SqlServer_Proc_Ordinals()
+        {
+            T(SqlServer(), "DocumentLoad", Ordinals);
+        }
+
         [TestMethod]
         public void Storage_Tests_SqlServer_Select_Columns()
         {
