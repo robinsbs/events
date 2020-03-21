@@ -17,15 +17,21 @@ namespace SkyBlueSoftware.Storage
 
         public override IEnumerable<IDataRow> Execute(string command)
         {
-            var connection = new SqlConnection(connectionString);
-            connection.Open();
-            var dbCommand = connection.CreateCommand();
-            dbCommand.CommandText = command;
-            var reader = dbCommand.ExecuteReader();
-            var dataReader = new DataReader(reader, CreateColumns(reader));
-            while (dataReader.Read())
+            using (var connection = new SqlConnection(connectionString))
             {
-                yield return dataReader;
+                connection.Open();
+                using (var dbCommand = connection.CreateCommand())
+                {
+                    dbCommand.CommandText = command;
+                    using (var reader = dbCommand.ExecuteReader())
+                    {
+                        var dataReader = new DataReader(reader, CreateColumns(reader));
+                        while (dataReader.Read())
+                        {
+                            yield return dataReader;
+                        }
+                    }
+                }
             }
         }
     }
