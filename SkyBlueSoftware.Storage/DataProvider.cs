@@ -10,7 +10,7 @@ namespace SkyBlueSoftware.Storage
 {
     public abstract class DataProvider : IDataProvider
     {
-        public abstract IEnumerable<IDataRow> Execute(string command);
+        public abstract IEnumerable<IDataRow> Execute(string command, params (string Name, object Value)[] parameters);
 
         protected ILookup<string, int> CreateColumns(DbDataReader reader)
         {

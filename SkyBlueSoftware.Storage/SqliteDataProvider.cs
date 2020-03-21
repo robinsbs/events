@@ -15,7 +15,7 @@ namespace SkyBlueSoftware.Storage
             this.connectionString = connectionString;
         }
 
-        public override IEnumerable<IDataRow> Execute(string command)
+        public override IEnumerable<IDataRow> Execute(string command, params (string Name, object Value)[] parameters)
         {
             using (var connection = new SqliteConnection(connectionString))
             {

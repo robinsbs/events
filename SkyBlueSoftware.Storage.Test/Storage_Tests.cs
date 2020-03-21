@@ -55,6 +55,12 @@ namespace SkyBlueSoftware.Storage.Test
         }
 
         [TestMethod]
+        public void Storage_Tests_SqlServer_Proc_Columns_Parameter_Int()
+        {
+            T(SqlServer(), "sbs.dbo.DocumentLoad", Columns, ("Id", 2));
+        }
+
+        [TestMethod]
         public void Storage_Tests_SqlServer_Proc_Ordinals()
         {
             T(SqlServer(), "sbs.dbo.DocumentLoad", Ordinals);
@@ -83,11 +89,11 @@ namespace SkyBlueSoftware.Storage.Test
             return new SqliteDataProvider(@"Data Source=..\..\..\sqlite.db");
         }
 
-        private void T(IDataProvider dataProvider, string command, Func<IDataRow, string> rowSelector)
+        private void T(IDataProvider dataProvider, string command, Func<IDataRow, string> rowSelector, params (string Name, object Value)[] parameters)
         {
             var results = new List<string>();
 
-            var rows = dataProvider.Execute(command);
+            var rows = dataProvider.Execute(command, parameters);
             foreach (var r in rows)
             {
                 results.Add(rowSelector(r));

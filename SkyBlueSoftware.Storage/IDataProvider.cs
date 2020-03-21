@@ -7,6 +7,6 @@ namespace SkyBlueSoftware.Storage
 {
     public interface IDataProvider
     {
-        IEnumerable<IDataRow> Execute(string command);
+        IEnumerable<IDataRow> Execute(string command, params (string Name, object Value)[] parameters);
     }
 }

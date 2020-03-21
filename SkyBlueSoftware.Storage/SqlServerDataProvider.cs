@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.Data.SqlClient;
+using SkyBlueSoftware.Framework;
 
 namespace SkyBlueSoftware.Storage
 {
@@ -16,7 +17,7 @@ namespace SkyBlueSoftware.Storage
             this.connectionString = connectionString;
         }
 
-        public override IEnumerable<IDataRow> Execute(string command)
+        public override IEnumerable<IDataRow> Execute(string command, params (string Name, object Value)[] parameters)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -24,8 +25,14 @@ namespace SkyBlueSoftware.Storage
                 using (var dbCommand = connection.CreateCommand())
                 {
                     dbCommand.CommandText = command;
-                    //dbCommand.Parameters.Add(new SqlParameter("@Id", 4));
-                    if (!command.Contains(" ")) dbCommand.CommandType = CommandType.StoredProcedure;
+                    if (command.HasNoSpaces())
+                    {
+                        dbCommand.CommandType = CommandType.StoredProcedure;
+                        foreach (var parameter in parameters)
+                        {
+                            dbCommand.Parameters.Add(new SqlParameter(parameter.Name, parameter.Value));
+                        }
+                    }
                     using (var reader = dbCommand.ExecuteReader())
                     {
                         var dataReader = new DataReader(reader, CreateColumns(reader));
