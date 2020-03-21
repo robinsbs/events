@@ -51,13 +51,13 @@ namespace SkyBlueSoftware.Storage.Test
         [TestMethod]
         public void Storage_Tests_SqlServer_Proc_Columns()
         {
-            T(SqlServer(), "DocumentLoad", Columns);
+            T(SqlServer(), "sbs.dbo.DocumentLoad", Columns);
         }
 
         [TestMethod]
         public void Storage_Tests_SqlServer_Proc_Ordinals()
         {
-            T(SqlServer(), "DocumentLoad", Ordinals);
+            T(SqlServer(), "sbs.dbo.DocumentLoad", Ordinals);
         }
 
         [TestMethod]

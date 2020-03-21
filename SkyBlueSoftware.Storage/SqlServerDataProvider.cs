@@ -2,6 +2,7 @@
 // Sky Blue Software licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 using System.Collections.Generic;
+using System.Data;
 using Microsoft.Data.SqlClient;
 
 namespace SkyBlueSoftware.Storage
@@ -23,6 +24,8 @@ namespace SkyBlueSoftware.Storage
                 using (var dbCommand = connection.CreateCommand())
                 {
                     dbCommand.CommandText = command;
+                    //dbCommand.Parameters.Add(new SqlParameter("@Id", 4));
+                    if (!command.Contains(" ")) dbCommand.CommandType = CommandType.StoredProcedure;
                     using (var reader = dbCommand.ExecuteReader())
                     {
                         var dataReader = new DataReader(reader, CreateColumns(reader));

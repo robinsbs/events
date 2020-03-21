@@ -11,7 +11,7 @@ namespace SkyBlueSoftware.TestFramework.Console
         {
             var test = new Storage_Tests();
             test.Initialize();
-            test.Storage_Tests_SqlServer();
+            test.Storage_Tests_SqlServer_Proc_Columns();
         }
     }
 }
