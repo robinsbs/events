@@ -29,26 +29,26 @@ namespace SkyBlueSoftware.Storage.Test
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public void Storage_Tests_Sqlite_Columns()
+        public void Storage_Tests_Sqlite_Select_Columns()
         {
             T(Sqlite(), "select * from document", Columns);
         }
 
         [TestMethod]
-        public void Storage_Tests_Sqlite_Ordinals()
+        public void Storage_Tests_Sqlite_Select_Ordinals()
         {
             T(Sqlite(), "select * from document", Ordinals);
         }
 
 #if !IsBuildServer
         [TestMethod]
-        public void Storage_Tests_SqlServer_Columns()
+        public void Storage_Tests_SqlServer_Select_Columns()
         {
             T(SqlServer(), "select * from document", Columns);
         }
 
         [TestMethod]
-        public void Storage_Tests_SqlServer_Ordinals()
+        public void Storage_Tests_SqlServer_Select_Ordinals()
         {
             T(SqlServer(), "select * from document", Ordinals);
         }
