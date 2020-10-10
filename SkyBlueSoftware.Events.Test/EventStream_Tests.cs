@@ -26,7 +26,7 @@ namespace SkyBlueSoftware.Events.Test
         public async Task EventStream_Tests_Test01()
         {
             var events = CE(typeof(A), typeof(B), typeof(E1));
-            await events.Publish<E1>().ConfigureAwait(false);
+            await events.Publish<E1>().Async();
             t.Verify(events);
         }
 
@@ -35,7 +35,7 @@ namespace SkyBlueSoftware.Events.Test
         {
             var events = CE(typeof(A), typeof(B), typeof(E));
             events.Where(x => x.Subscriber == typeof(A)).ForEach(x => x.Unsubscribe());
-            await events.Publish<E>().ConfigureAwait(false);
+            await events.Publish<E>().Async();
             t.Verify(events);
         }
 
@@ -43,7 +43,7 @@ namespace SkyBlueSoftware.Events.Test
         public async Task EventStream_Tests_Test03()
         {
             var events = CE(typeof(C), typeof(E2));
-            await events.Publish<E2>().ConfigureAwait(false);
+            await events.Publish<E2>().Async();
             t.Verify(events);
         }
 
@@ -51,7 +51,7 @@ namespace SkyBlueSoftware.Events.Test
         public async Task EventStream_Tests_Test04()
         {
             var events = CE(typeof(C), typeof(E));
-            await events.Publish<E>().ConfigureAwait(false);
+            await events.Publish<E>().Async();
             t.Verify(events);
         }
 
@@ -59,9 +59,9 @@ namespace SkyBlueSoftware.Events.Test
         public async Task EventStream_Tests_Test05()
         {
             var events = CE(typeof(D), typeof(E1), typeof(E2), typeof(E3));
-            await events.Publish<E1>().ConfigureAwait(false);
-            await events.Publish<E2>().ConfigureAwait(false);
-            await events.Publish<E3>().ConfigureAwait(false);
+            await events.Publish<E1>().Async();
+            await events.Publish<E2>().Async();
+            await events.Publish<E3>().Async();
             t.Verify(events);
         }
 
@@ -70,7 +70,7 @@ namespace SkyBlueSoftware.Events.Test
         {
             var events = CE(typeof(A), typeof(B), typeof(E));
             events.FirstOrDefault(x => x.Subscriber == typeof(A)).Unsubscribe().Resubscribe();
-            await events.Publish<E>().ConfigureAwait(false);
+            await events.Publish<E>().Async();
             t.Verify(events);
         }
 
@@ -81,7 +81,7 @@ namespace SkyBlueSoftware.Events.Test
             var events = a.SubscribedTo().ToArray();
             Assert.AreEqual(1, events.Length);
             Assert.AreEqual(typeof(E), events[0]);
-            await Task.CompletedTask.ConfigureAwait(false);
+            await Task.CompletedTask.Async();
         }
 
         [TestMethod]
@@ -92,28 +92,28 @@ namespace SkyBlueSoftware.Events.Test
             Assert.AreEqual(2, events.Length);
             Assert.AreEqual(typeof(IE), events[0]);
             Assert.AreEqual(typeof(E2), events[1]);
-            await Task.CompletedTask.ConfigureAwait(false);
+            await Task.CompletedTask.Async();
         }
 
         public class A : ISubscribeTo<E>, IRequireRegistration
         {
-            public async Task On(E e) => await Task.CompletedTask.ConfigureAwait(false);
+            public async Task On(E e) => await Task.CompletedTask.Async();
         }
 
         public class B : ISubscribeTo<E>, IRequireRegistration
         {
-            public async Task On(E e) => await Task.CompletedTask.ConfigureAwait(false);
+            public async Task On(E e) => await Task.CompletedTask.Async();
         }
 
         public class C : ISubscribeTo<E2>, IRequireRegistration
         {
-            public async Task On(E2 e) => await Task.CompletedTask.ConfigureAwait(false);
+            public async Task On(E2 e) => await Task.CompletedTask.Async();
         }
 
         public class D : ISubscribeTo<IE>, ISubscribeTo<E2>, IRequireRegistration
         {
-            public async Task On(IE e) => await Task.CompletedTask.ConfigureAwait(false);
-            public async Task On(E2 e) => await Task.CompletedTask.ConfigureAwait(false);
+            public async Task On(IE e) => await Task.CompletedTask.Async();
+            public async Task On(E2 e) => await Task.CompletedTask.Async();
         }
 
         public interface IE { }

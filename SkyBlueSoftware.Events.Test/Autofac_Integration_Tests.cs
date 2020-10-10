@@ -35,7 +35,7 @@ namespace SkyBlueSoftware.Events.Test
             var parameters = args.Select(x => new TypedParameter(x.GetType(), x)).OfType<Parameter>().ToArray();
             var w = c.Resolve<Widget>(parameters);
             t.Verify(w);
-            await Task.CompletedTask.ConfigureAwait(false);
+            await Task.CompletedTask.Async();
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace SkyBlueSoftware.Events.Test
             int i = 1;
             string s = "s";
             var d = new DateTime(2019, 12, 1, 3, 2, 1);
-            var w = await f.Create<Widget>(i, s, d).ConfigureAwait(false);
+            var w = await f.Create<Widget>(i, s, d).Async();
             t.Verify(w);
         }
 

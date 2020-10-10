@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace SkyBlueSoftware.Events
 {
@@ -15,6 +17,16 @@ namespace SkyBlueSoftware.Events
             {
                 action(item);
             }
+        }
+
+        public static ConfiguredTaskAwaitable<T> Async<T>(this Task<T> t)
+        {
+            return t.ConfigureAwait(false);
+        }
+
+        public static ConfiguredTaskAwaitable Async(this Task t)
+        {
+            return t.ConfigureAwait(false);
         }
 
         public static IEnumerable<Type> SubscribedTo(this object o)
