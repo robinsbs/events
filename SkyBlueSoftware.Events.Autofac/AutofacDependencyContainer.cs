@@ -4,20 +4,21 @@
 using Autofac;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac.Core;
 
 namespace SkyBlueSoftware.Events.Autofac
 {
     public class AutofacDependencyContainer : IDependencyContainer
     {
-        private readonly IContainer container;
+        private readonly ILifetimeScope container;
 
-        public AutofacDependencyContainer(IContainer container)
+        public AutofacDependencyContainer(ILifetimeScope container)
         {
             this.container = container;
         }
         public Task<T> Create<T>(params object[] args)
         {
-            var parameters = args.Where(x => x != null).Select(x => new TypedParameter(x.GetType(), x)).ToArray();
+            var parameters = args.Where(x => x != null).Select(x => new TypedParameter(x.GetType(), x)).OfType<Parameter>().ToArray();
             var o = container.Resolve<T>(parameters);
             return Task.FromResult(o);
         }

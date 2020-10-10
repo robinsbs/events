@@ -71,7 +71,7 @@ namespace SkyBlueSoftware.Events.Autofac
 
         public static void RegisterContainer(this ContainerBuilder b)
         {
-            IContainer container = null;
+            ILifetimeScope container = null;
             b.Register(c => container).AsSelf();
             b.RegisterBuildCallback(c => container = c);
         }
