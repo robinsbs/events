@@ -14,7 +14,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SkyBlueSoftware.Events" Version="0.0.6.475-CI-475" />
+    <PackageReference Include="SkyBlueSoftware.Events" Version="0.0.7" />
   </ItemGroup>
 
   <ItemGroup>
